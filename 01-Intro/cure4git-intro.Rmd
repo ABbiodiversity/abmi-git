@@ -1,0 +1,278 @@
+---
+title: "Introduction to Git"
+subtitle: "<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
+author: The Alberta Biodiversity Monitoring Institute
+date: # `r format(Sys.time(), '%d %B %Y')`
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts] 
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include = FALSE}
+
+options(htmltools.dir.version = FALSE)
+
+library(knitr)
+
+opts_chunk$set(
+  fig.align="center", #fig.width=6, fig.height=4.5, 
+  # out.width="748px", #out.length="520.75px",
+  dpi=300, #fig.path='Figs/',
+  cache=T#, echo=F, warning=F, message=F
+  )
+
+```
+
+# Outline of these workshops
+
+## Workshop 1 (October 17, 2019)
+
+1. [Prologue](#Prologue)
+
+  > What are we doing here?! 
+
+1. [Git and Github](#git)
+
+  > Okay, starting to make sense.
+  
+1. [Talking with Git](#shell)
+
+1. [Git(hub) and RStudio](#rstudio)
+
+  > Ah, the good stuff.
+
+1. [Git from the shell](#shell)
+
+  > Looks scary! But isn't.
+
+1. [Summary](#summary)
+
+  > And what will we do next time?
+
+---
+
+# Outline of these workshops
+
+## Workshop 2 (October 24, 2019)
+
+- Troubleshoot issues that inevitably arise 
+
+- Go through some more advanced Git operations and workflows:
+
+  + Conflicts
+  + Branches
+  + Forking
+
+## Workshop 3 (TBD)
+
+- Discuss practices and procedures for using Git in ABMI workflow
+
+  + Github organization, teams, and permissions.
+  + etc. 
+
+---
+class: inverse, center, middle
+name: prologue
+
+# Prologue
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
+
+---
+
+# Prologue
+
+## The Highest Ideal
+
+> *The goal is a collaborative, transparent, and efficient approach to our scientific and computational work at the ABMI.* 
+
+
+<br>
+Part of this process will be figuring out how best to structure a collaborative culture within the organization (and with external partners).
+
+We want to operationalize the **reproducibility** of our research.
+
+<br>
+
+So there isn't a 'right' way for now, but hopefully it will develop over time where staff from all corners of the organization can contribute to and review the scientific products were generate.  
+
+---
+
+# Going Forward
+
+**The Plan** (capital T capital P) is to:
+
+1. Build skills with git software among staff
+
+  + Develop curated list of Help resources
+  + Develop a nucleus of staff who can consistently provide support to others
+  + Meet (semi-) regularly to continue skill development 
+
+1. Introduce git to the workflow of a few projects identified as good candidates
+
+1. Over time, build our analyses using git as a collaboration tool and version control backstop, accessible by others both within and outside of the organization.
+
+  ... something, something ...
+
+1. Conquer the world! 
+
+---
+class: inverse, center, middle
+name: git
+
+# Git and GitHub
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
+---
+
+# Why bother?
+
+<div align="center">
+<img src="http://phdcomics.com/comics/archive/phd101212s.gif" height=500>
+</div>
+
+---
+
+# Git(hub) solves this problem
+
+### Git
+
+- Git is a powerful distributed<sup>1</sup> version control system.
+> If Dropbox and Word's 'Track Changes' feature had a baby, Git would be that baby.
+
+- Extremely useful for writing and tracking changes to code.
+
+### Github
+
+- Git and Github are distinct things.
+  + Github is an online hosting platform that provides an array of services built on top of the Git system (other example as Gitlab and Bitbucket).
+  + Just like we don't *need* RStudio to run R code, we don't *need* Github to use Git - but it makes our lives much easier.
+
+.footnote[
+<sup>1</sup> Doesn't require a centralized server to host the repository.]
+
+---
+
+# Git(hub) for scientific research
+
+- Besides the benefits of git as a rigorous version control and collaboration tool, Git(hub) also helps to operationalize the ideals of open science and reproducibility.
+
+  +  *Nature:* "[Democratic databases: science on GitHub](https://www.nature.com/news/democratic-databases-science-on-github-1.20719)" (Perkel, 2016).
+  
+---
+
+# Glossary of Terms
+
+Some commonly used terms to learn:
+
+- **Repository** (aka a 'repo' in cool kids slang.)
+
+A file location where all the files related to a project are stored.
+
+- **Commit**
+
+The commit command is used to save your changes (text writing, code, new files ... anything) to the local repository.  
+
+- **Push / Pull**
+
+You *push* the changes you've made to your local repository to a remote repository. 
+
+You *pull* any changes made in the remote repository (e.g. by your collaborators) to your local one. 
+
+---
+
+# Getting Started
+
+<div align="center">
+<img src="pics/so-it-begins-theoden.gif" height=420>
+</div>
+
+> Much like the battle of Helm's Deep, this will likely involve some up front pain. 
+
+---
+
+# Getting Started
+
+### Register for a [Github](www.github.com) account.
+
+  - It's free! Don't worry about the paid accounts for now<sup>1</sup>.
+
+### Install Git on your local machine.
+
+  - Depends on the OS you're running, but we'll assume Windows for this tutorial.
+  - [Git for Windows](https://gitforwindows.org/), aka 'Git Bash', is a desirable approach.
+  
+.footnote[
+<sup>1</sup> You'll qualify for an educational account while you work for ABMI/UofA.]
+  
+---
+
+# Getting Started
+
+### Introduce yourself to Git.
+
+Directly in the Shell:
+  
+```
+$ git config --global user.name 'Marcus Becker'
+$ git config --global user.email 'mabecker@ualberta.ca`
+```
+Or through R:
+
+```r
+# install.packages("usethis")
+  
+library(usethis)
+use_git_config(user.name = "Marcus Becker", 
+               user.email = "mabecker@ualberta.ca")
+```
+
+Tips: Use your (real) full name, and 
+
+---
+class: inverse, center, middle
+name: rstudio
+
+# Github and RStudio
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
+---
+
+# General Recipe
+
+- Create a new R-Project using the following steps: 
+
+`File -> New Project... -> Version Control -> Git` 
+
+---
+class: inverse, center, middle
+name: conquer
+
+# Go forth and conquer
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
