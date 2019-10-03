@@ -32,21 +32,19 @@ class: center, middle, inverse, title-slide
 
 1. [Prologue](#Prologue)
 
-  &gt; What are we doing here?! 
+  &gt; What are we doing here? 
 
-1. [Git and Github](#git)
+1. [Version Control with Git(hub)](#git)
 
-  &gt; Okay, starting to make sense.
+  &gt; Version Control, baby! 
   
 1. [Talking with Git](#shell)
+
+  &gt; "Hello, World!"
 
 1. [Git(hub) and RStudio](#rstudio)
 
   &gt; Ah, the good stuff.
-
-1. [Git from the shell](#shell)
-
-  &gt; Looks scary! But isn't.
 
 1. [Summary](#summary)
 
@@ -66,7 +64,7 @@ class: center, middle, inverse, title-slide
   + Branches
   + Forking
 
-## Workshop 3 (TBD)
+## Workshop 3 (If desired; TBD)
 
 - Discuss practices and procedures for using Git in ABMI workflow
 
@@ -95,6 +93,8 @@ Part of this process will be figuring out how best to structure a collaborative 
 
 We want to operationalize the **reproducibility** of our research.
 
+We want staff to **collaborate** and learn from one another. 
+
 &lt;br&gt;
 
 So there isn't a 'right' way for now, but hopefully it will develop over time where staff from all corners of the organization can contribute to and review the scientific products were generate.  
@@ -116,8 +116,10 @@ So there isn't a 'right' way for now, but hopefully it will develop over time wh
 1. Over time, build our analyses using git as a collaboration tool and version control backstop, accessible by others both within and outside of the organization.
 
   ... something, something ...
+  
+--
 
-1. Conquer the world! 
+1. Conquer the world!! 
 
 ---
 class: inverse, center, middle
@@ -135,52 +137,123 @@ name: git
 
 ---
 
-# Git(hub) solves this problem
+# Git (in theory)
 
-### Git
+A **version control system** is a tool that manages changes made to files and directories in a project.
 
-- Git is a powerful distributed&lt;sup&gt;1&lt;/sup&gt; version control system.
-&gt; If Dropbox and Word's 'Track Changes' feature had a baby, Git would be that baby.
+Many exist, but we'll focus on a particularly powerful one: **Git**.
+&gt; If Dropbox and Word's *Track Changes* feature had a baby, Git would be that baby.
 
-- Extremely useful for writing and tracking changes to code.
+--
+&lt;br&gt;
 
-### Github
+Why's it useful?
 
-- Git and Github are distinct things.
-  + Github is an online hosting platform that provides an array of services built on top of the Git system (other example as Gitlab and Bitbucket).
-  + Just like we don't *need* RStudio to run R code, we don't *need* Github to use Git - but it makes our lives much easier.
-
-.footnote[
-&lt;sup&gt;1&lt;/sup&gt; Doesn't require a centralized server to host the repository.]
++ Nothing that is saved to Git is ever lost, unless you work really hard at it.
++ Git can synchronize work done by different people on different machines, and notify you when your work conflicts with someone else's. 
++ Well designed for writing and tracking changes to code ... something we all tend to do a lot of here. 
 
 ---
 
-# Git(hub) for scientific research
+# Key Git Terms
 
-- Besides the benefits of git as a rigorous version control and collaboration tool, Git(hub) also helps to operationalize the ideals of open science and reproducibility.
+### **Repository**
+
+Git projects have two parts: the files and directories you create and edit directly, and the extra information that Git records about the project's history. 
+
+The combination of these two things is called a *repository*, or 'repo' as the cool kids like Peter say. 
+
+### **Stage** and **Commit**
+
+Git has a *staging area* in which it stores files with changes you want to save, but haven't been saved yet.
+  
+  &gt; It's like putting things in a box that you intend to mail out. 
+  
+*Commiting* those changes is like putting that box in the mail. Your changes are saved into the history of your local repo. 
+
+---
+
+# Key Git Terms
+
+### **Pull**/**Push**&lt;sup&gt;1&lt;/sup&gt;
+
+Repositories can be local (on your machine) or *remote*, i.e. hosted online by a service like Github (which we'll chat about tout de suite ...)
+
+A typical workflow:
+
+  + You *pull* in your collaborators' work from a remote repository so that you have the latest version of everything.
+  + You do some work.
+  + You *push* your work back to the remote repository so that your collaborators can access it. 
+
+.footnote[
+&lt;sup&gt;1&lt;/sup&gt; These two commands were intentionally ordered in this way - it's good practice to Pull before you start work on a project, then Push when you're finished, even if you're working alone. If (when) you forget, there will be pain. Best to get in the habit.]
+
+---
+
+# Key Git Terms
+
+### Many others ...
+
+&lt;br&gt;
+Conflicts
+
+Cloning
+
+Branches
+
+Forking
+
+&lt;br&gt;
+But we'll save these concepts for the next workshop(s).
+
+---
+
+# Git (in practice)
+
+&lt;div align="center"&gt;
+&lt;img src="https://imgs.xkcd.com/comics/git.png" height=500&gt;
+&lt;/div&gt;
+
+---
+
+# Git (in practice)
+
+&lt;div align="center"&gt;
+&lt;img src="pics/git-fire.png" height=420&gt;
+&lt;/div&gt;
+
+---
+
+# Github
+
+**Git and Github are distinct things.**
+
+  + [Github](https://www.github.com) is an online hosting platform that provides an array of services built on top of the Git system&lt;sup&gt;1&lt;/sup&gt;.
+  
+  + We can create, manage permissions to, and store our files in repositories hosted by Github.
+  
+  + Just like we don't *need* RStudio to run R code, we don't *need* Github to use Git - but it makes our lives much easier.
+  
+&lt;div align="center"&gt;
+&lt;img src="pics/github-logo.svg" height=150&gt;
+&lt;/div&gt;
+
+.footnote[
+&lt;sup&gt;1&lt;/sup&gt; Other examples are Gitlab and Bitbucket.]
+
+---
+
+# Git(hub) for Scientific Research
+
+In addition to the benefits of rigorous version control and collaboration tool, Git(hub) also helps to operationalize the ideals of open science and reproducibility.
 
   +  *Nature:* "[Democratic databases: science on GitHub](https://www.nature.com/news/democratic-databases-science-on-github-1.20719)" (Perkel, 2016).
   
----
+Journals are increasingly moving towards stricter requirements regarding reproducibility and data access. 
 
-# Glossary of Terms
-
-Some commonly used terms to learn:
-
-- **Repository** (aka a 'repo' in cool kids slang.)
-
-A file location where all the files related to a project are stored.
-
-- **Commit**
-
-The commit command is used to save your changes (text writing, code, new files ... anything) to the local repository.  
-
-- **Push / Pull**
-
-You *push* the changes you've made to your local repository to a remote repository. 
-
-You *pull* any changes made in the remote repository (e.g. by your collaborators) to your local one. 
-
+  + No more frustrating reads of a tiny Methods section in a dusty old pdf file of a paper where you're trying desparately to understand what they did, step-by-step (.. *breathes heavily* ..).
+  + You can host all the data, code, and writing for papers, projects, and/or reports in one place. Even [workshop materials](https://github.com/mabecker89/cure4git).
+  
 ---
 
 # Getting Started
@@ -194,6 +267,8 @@ You *pull* any changes made in the remote repository (e.g. by your collaborators
 ---
 
 # Getting Started
+
+.font80[Note: there are a ton of great Git resources online to you walk you through this process in depth. A bunch are listed in the [Resources](#resources) section at the back of this presentation and in the workshop's repo [README file](https://github.com/mabecker89/cure4git/blob/master/README.md), many of which are heavily borrowed from for this presentation.] 
 
 ### Register for a [Github](www.github.com) account.
 
@@ -215,11 +290,13 @@ You *pull* any changes made in the remote repository (e.g. by your collaborators
 
 Directly in the Shell:
   
-```
+
+```shell
 $ git config --global user.name 'Marcus Becker'
 $ git config --global user.email 'mabecker@ualberta.ca`
 ```
 Or through R:
+
 
 ```r
 # install.packages("usethis")
@@ -229,7 +306,9 @@ use_git_config(user.name = "Marcus Becker",
                user.email = "mabecker@ualberta.ca")
 ```
 
-Tips: Use your (real) full name, and 
+&lt;br&gt;
+&lt;br&gt;
+Tips: Use your (real) full name, and the email associated with your Github account. 
 
 ---
 class: inverse, center, middle
@@ -251,6 +330,11 @@ name: conquer
 
 # Go forth and conquer
 &lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
+---
+
+# Resources
+
+
 ---
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
