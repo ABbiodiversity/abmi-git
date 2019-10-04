@@ -163,7 +163,7 @@ Git projects have two parts: the files and directories you create and edit direc
 
 The combination of these two things is called a *repository*, or 'repo' as the cool kids like Peter say. 
 
-### **Stage** and **Commit**
+### **Stage** (or "add") and **Commit**
 
 Git has a *staging area* in which it stores files with changes you want to save, but haven't been saved yet.
   
@@ -318,11 +318,59 @@ name: rstudio
 &lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
 ---
 
+# Seamless Integration 
+
+A wonderful aspect of RStudio is how well it integrates version control into your project workflow.
+
+Git is a separate program to R, but RStudio connects them so well that you feel they are part of the same ecosystem.
+
+You can use Git through the RStudio GUI, and in the background it executes the shell commands for you.
+
+--
+
+&lt;br&gt;
+
+&gt; Because of how easy it is&lt;sup&gt;1&lt;/sup&gt;, we'll introduce the use of Git through RStudio in this next section.
+
+.footnote[
+&lt;sup&gt;1&lt;/sup&gt; There are reasons why working with Git through RStudio is limiting. We'll touch on those next time when we work through some more advanced concepts.]
+
+---
+
 # General Recipe
 
-- Create a new R-Project using the following steps: 
+.font80[*For new projects*]
 
-`File -&gt; New Project... -&gt; Version Control -&gt; Git` 
+1. Create a repo on GitHub and initialize with a README.
+
+1. Copy the HTTPS/SSH link (the green "Clone or Download" button).
+
+1. In RStudio, create a new Project using the following steps: 
+
+  `File -&gt; New Project... -&gt; Version Control -&gt; Git` 
+  
+  and **clone** the repo to your local machine by pasting your copied link into the "Repository URL:" box.
+  
+1. Choose the project path (be intentional!) and click **Create Project**. 
+
+&lt;br&gt;
+&gt; See the gif walkthrough on the next slide.
+
+---
+
+# General Recipe
+
+&lt;div align="center"&gt;
+&lt;img src="pics/github-rstudio.gif" height=540&gt;
+&lt;/div&gt;
+
+---
+
+# General Recipe
+
+We've now cloned a remote repo from Github onto our local machine. Yay!
+
+
 
 ---
 class: inverse, center, middle
