@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Introduction to Git</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="The Alberta Biodiversity Monitoring Institute" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Introduction to Git
+## <html>
+<div style="float:left">
+
+</div>
+<hr color='#EB811B' size=1px width=796px>
+</html>
+### The Alberta Biodiversity Monitoring Institute
+
+---
+
+
+
+
+# Outline of these workshops
+
+### Workshop 1 (October 17, 2019)
+
+1. [Prologue](#prologue)
+
+  .font80[What are we doing here?]
+
+1. [Git](#git)
+
+  .font80[Version Control, baby!] 
+  
+1. [Github](#github)
+
+  .font80[Makes our lives easy.]
+
+1. [Git(hub) and RStudio](#rstudio)
+
+  .font80["Hello World!"]
+
+1. [Shell](#shell)
+
+  .font80[Looks scary (but isn't.)]
+
+---
+
+# Outline of these workshops
+
+### Workshop 2 (October 24, 2019)
+
+- Troubleshoot some setup issues. 
+
+- Go through some more advanced Git operations and workflows.
+
+
+### Workshop 3 (If desired; TBD)
+
+- Discuss practices and procedures for using Git in ABMI workflow
+
+  + Github organization, teams, and permissions.
+  + Projects to start with.
+
+---
+class: inverse, center, middle
+name: prologue
+
+# Prologue
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
+
+---
+
+# Prologue
+
+### The Highest Ideal
+
+&gt; *The goal is a collaborative, transparent, and efficient approach to our scientific and computational work at the ABMI.* 
+
+
+&lt;br&gt;
+Part of this process will be figuring out how best to structure a collaborative culture within the organization (and with external partners).
+
+We want to operationalize the **reproducibility** of our research.
+
+We want staff to **collaborate** and learn from one another. 
+
+&lt;br&gt;
+
+So there isn't a 'right' way for now, but hopefully it will develop over time where staff from all corners of the organization can contribute to and review the scientific products we generate.  
+
+---
+
+# Going Forward
+
+**The Plan** (capital T capital P) is to:
+
+1. Build skills with Git software among staff:
+
+  + Develop curated list of Help resources;
+  + Develop a nucleus of staff who can consistently provide support to others;
+  + Meet (semi-) regularly to continue skill development. 
+
+1. Introduce Git to the workflow of a few projects identified as good candidates.
+
+1. Over time, build our analyses using git as a collaboration tool and version control backstop, accessible by others both within and outside of the organization.
+
+  ... something, something ...
+  
+--
+
+1. Conquer the world!! 
+
+---
+class: inverse, center, middle
+name: git
+
+# Intro to Git
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
+---
+
+# Why bother?
+
+&lt;div align="center"&gt;
+&lt;img src="http://phdcomics.com/comics/archive/phd101212s.gif" height=500&gt;
+&lt;/div&gt;
+
+---
+
+# Git (in theory)
+
+A **version control system** is a tool that manages changes made to files and directories in a project.
+
+Many exist, but we'll focus on a particularly powerful one: **Git**.
+&gt; If Dropbox and Word's *Track Changes* feature had a baby, Git would be that baby.
+
+--
+&lt;br&gt;
+
+Why's it useful?
+
++ Nothing that is saved to Git is ever lost, unless you work really hard at it.
++ Git can synchronize work done by different people on different machines, and notify you when your work conflicts with someone else's. 
++ Well designed for writing and tracking changes to code ... something we all tend to do a lot of here. 
+
+---
+
+# Key Git Terms
+
+### **Repository**
+
+Git projects have two parts: the files and directories you create and edit directly, and the extra information that Git records about the project's history. 
+
+The combination of these two things is called a *repository*, or 'repo' as the cool kids like Peter say. 
+
+### **Stage** (or "add") and **Commit**
+
+Git has a *staging area* in which it stores files with changes you want to save, but haven't been saved yet.
+  
+  &gt; It's like putting things in a box that you intend to mail out. 
+  
+*Commiting* those changes is like putting that box in the mail. Your changes are saved into the history of your local repo. 
+
+---
+
+# Key Git Terms
+
+### **Pull**/**Push**&lt;sup&gt;1&lt;/sup&gt;
+
+Repositories can be local (on your machine) or *remote*, i.e. hosted online by a service like Github (which we'll chat about tout de suite ...)
+
+A typical workflow:
+
+  + You *pull* in your collaborators' work from a remote repository so that you have the latest version of everything.
+  + You do some work.
+  + You *push* your work back to the remote repository so that your collaborators can access it. 
+
+.footnote[
+&lt;sup&gt;1&lt;/sup&gt; These two commands were intentionally ordered in this way - it's good practice to Pull before you start work on a project, then Push when you're finished, even if you're working alone. If (when) you forget, there will be pain. Best to get in the habit.]
+
+---
+
+# Key Git Terms
+
+### Many others ...
+
+&lt;br&gt;
+Conflicts
+
+Cloning
+
+Branches
+
+Forking
+
+&lt;br&gt;
+But we'll save these concepts for the next workshop(s).
+
+---
+
+# Git (in practice)
+
+&lt;div align="center"&gt;
+&lt;img src="https://imgs.xkcd.com/comics/git.png" height=500&gt;
+&lt;/div&gt;
+
+---
+
+# Git (in practice)
+
+&lt;div align="center"&gt;
+&lt;img src="pics/git-fire.png" height=420&gt;
+&lt;/div&gt;
+
+---
+class: inverse, center, middle
+name: github
+
+# Github
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
+---
+
+# Github
+
+**Git and Github are distinct things.**
+
+  + [Github](https://www.github.com) is an online hosting platform that provides an array of services built on top of the Git system&lt;sup&gt;1&lt;/sup&gt;.
+  
+  + We can create, manage permissions to, and store our files in repositories hosted by Github.
+  
+  + Just like we don't *need* RStudio to run R code, we don't *need* Github to use Git - but it makes our lives much easier.
+  
+&lt;div align="center"&gt;
+&lt;img src="pics/github-logo.svg" height=150&gt;
+&lt;/div&gt;
+
+.footnote[
+&lt;sup&gt;1&lt;/sup&gt; Other examples are Gitlab and Bitbucket.]
+
+---
+
+# Git(hub) for Scientific Research
+
+In addition to the benefits of rigorous version control and collaboration tool, Git(hub) also helps to operationalize the ideals of open science and reproducibility.
+
+  +  *Nature:* "[Democratic databases: science on GitHub](https://www.nature.com/news/democratic-databases-science-on-github-1.20719)" (Perkel, 2016).
+  
+Journals are increasingly moving towards stricter requirements regarding reproducibility and data access. 
+
+  + No more frustrating reads of a tiny Methods section in a dusty old pdf file of a paper where you're trying desparately to understand what they did, step-by-step (.. *breathes heavily* ..).
+  + You can host all the data, code, and writing for papers, projects, and/or reports in one place. Even [workshop materials](https://github.com/mabecker89/cure4git).
+
+---
+class: inverse, center, middle
+name: setup
+
+# Setup
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
+---
+
+# Getting Started
+
+&lt;div align="center"&gt;
+&lt;img src="pics/so-it-begins-theoden.gif" height=420&gt;
+&lt;/div&gt;
+
+&gt; Much like the battle of Helm's Deep, this will likely involve some up front pain. But you will emerge victorious.  
+
+---
+
+# Getting Started
+
+.font80[Note: there are a ton of great Git resources online to you walk you through this process in depth. A bunch are listed in the [Resources](#resources) section at the back of this presentation and in the workshop's repo [README file](https://github.com/mabecker89/cure4git/blob/master/README.md), many of which are heavily borrowed from for this presentation.] 
+
+### Register for a [Github](www.github.com) account.
+
+  - It's free! Don't worry about the paid accounts for now&lt;sup&gt;1&lt;/sup&gt;.
+
+### Install Git on your local machine.
+
+  - Depends on the OS you're running, but we'll assume Windows for this tutorial.
+  - [Git for Windows](https://gitforwindows.org/), aka 'Git Bash', is a desirable approach.
+  
+.footnote[
+&lt;sup&gt;1&lt;/sup&gt; You'll qualify for an educational account while you work for ABMI/UofA.]
+  
+---
+
+# Getting Started
+
+### Introduce yourself to Git.
+
+Directly in the Shell (Git Bash):
+
+```bash
+$ git config --global user.name 'Marcus Becker'
+$ git config --global user.email 'mabecker@ualberta.ca'
+```
+  
+Or through R:
+
+
+```r
+# install.packages("usethis")
+  
+library(usethis)
+use_git_config(user.name = "Marcus Becker", 
+               user.email = "mabecker@ualberta.ca")
+```
+
+&lt;br&gt;
+&lt;br&gt;
+Tips: Use your (real) full name, and the email associated with your Github account. 
+
+---
+class: inverse, center, middle
+name: rstudio
+
+# Git(hub) and RStudio
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
+---
+
+# Seamless Integration 
+
+A wonderful aspect of RStudio is how well it integrates version control into your project workflow.
+
+Git is a separate program to R, but RStudio connects them so well that you feel they are part of the same ecosystem.
+
+You can use Git through the RStudio GUI, and in the background it executes the shell commands for you.
+
+--
+
+&lt;br&gt;
+
+&gt; Because of how easy it is&lt;sup&gt;1&lt;/sup&gt;, we'll introduce the use of Git through RStudio in this next section.
+
+.footnote[
+&lt;sup&gt;1&lt;/sup&gt; There are reasons why working with Git through RStudio is limiting. We'll touch on those next time when we work through some more advanced concepts.]
+
+---
+
+# General Recipe
+
+.font80[*For new projects*]
+
+1. Create a repo on GitHub and initialize with a README.
+
+1. Copy the HTTPS/SSH link (the green "Clone or Download" button).
+
+1. In RStudio, create a new Project using the following steps: 
+
+  `File -&gt; New Project... -&gt; Version Control -&gt; Git` 
+  
+  and **clone** the repo to your local machine by pasting your copied link into the "Repository URL:" box.
+  
+1. Choose the project path (be intentional!) and click **Create Project**. 
+
+&lt;br&gt;
+&gt; See the gif walkthrough on the next slide.
+
+---
+
+# General Recipe
+
+&lt;div align="center"&gt;
+&lt;img src="pics/github-rstudio.gif" height=540&gt;
+&lt;/div&gt;
+
+---
+
+# General Recipe
+
+We've now cloned a remote repo from Github onto our local machine. Yay!
+
+Remember those important command terms? (**Stage, Commit, Pull**, and **Push**) &lt;br&gt;
+Let's execute them (Well, let RStudio execute them for us). 
+
+.font90[1. Make a change to the repo README in RStudio ("Hello World!"). Save it.
+
+1. Click the 'Git' tab in the `Environments, History, Connections .. ` pane.
+
+1. Click `Commit`.
+
+1. Click the `Stage` checkbox of the change you want to commit. 
+
+  + You'll see a nice display of the changes you've either added (green) or deleted (red).
+
+1. Write a `Commit message`. Be detailed. You never know when you'll need to know what you did in a particular commit. Commit the change.
+
+1. Click `Pull` to retrieve any changes made by you or a collaborator in the upstream Github repo.
+
+1. Click `Push`, which will send your changes to the remote repo on Github.] 
+
+---
+
+# General Recipe
+
+&lt;div align="center"&gt;
+&lt;img src="pics/rstudio-commit-push.gif" height=540&gt;
+&lt;/div&gt;
+
+---
+
+# Recap
+
+### What did we just do?
+
+.font80[
++ Made some changes to a file locally ("Look at this wonderful work I've done!")
++ Staged these changes ("These are the wonderful changes I've made!")
++ Committed these local changes to our Git history ("Yes, I'm sure I want these changes.")
++ Pulled from the remote repo upstream (good practice)
++ Pushed our shiny new changes out into the remote repo, accessible to our collaborators ("Look at my wonderful work!")
+]
+
+### Why this workflow?
+
+.font80[
++ Allows Github to act as the central node in the distributed version control network.
++ Copying project from Github to your machine automatically sets up the local Git repo for you.
++ RStudio Projects interact seamlessly with Git and Github.
+  - .RProj file acts as an anchor point for all other files in the repo, solving absolute vs. relative path problems&lt;sup&gt;1&lt;/sup&gt;.
+  ]
+
+.footnote[
+&lt;sup&gt;1&lt;/sup&gt; .font80[Please don't call files from `"YourComputer/YourName/Documents/SpecialPlace/Sub-Folder/myfile"` in your scripts. An angel loses its wings every time you do. Try `"./myfile"` instead :)]]
+
+---
+
+# Other Workflows
+
+&lt;br&gt;
+&lt;br&gt;
+.font120[New Project, Github First]
+
+&lt;br&gt;
+.font120[[Existing Project, Github First](https://happygitwithr.com/existing-github-first.html)]
+
+&lt;br&gt;
+.font120[[Existing Project, Github Last](https://happygitwithr.com/existing-github-last.html)]
+
+---
+class: inverse, center, middle
+name: shell
+
+# Shell
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
+---
+
+# Git from the shell
+
+What's RStudio doing in the background? 
+
+It's executing a series of commands for you. But you can do these yourself.
+
+Why bother with the shell?
+
++ The shell is more powerful and flexible. You can do more.
++ Potentially more appropriate for projects that aren't (entirely) based in R.
+--
+&lt;br&gt;
++ **You feel like a programming badass.** 
+
+---
+
+# Git from the shell (1)
+
+&lt;span style="color:black"&gt;**1. Create a repo on GitHub and initialize with a README.**
+
+&lt;span style="color:black"&gt;**2. Copy the HTTPS/SSH link (the green "Clone or Download" button).**
+
+&lt;span style="color:grey"&gt;3. In RStudio, create a new Project using the following steps: 
+
+&lt;span style="color:grey"&gt;`File -&gt; New Project... -&gt; Version Control -&gt; Git` 
+  
+  &lt;span style="color:grey"&gt;and **clone** the repo to your local machine by pasting your copied link into the "Repository URL:" box.
+  
+```bash
+$ git clone https://github.com/mabecker89/ABMI-test.git
+```
+  
+&lt;span style="color:grey"&gt;4. Choose the project path (be intentional!) and click **Create Project**.
+
+&lt;span style="color:black"&gt;4. Make this new repo your working directory.
+
+```bash
+$ cd ABMI-test
+```
+---
+count: false
+
+# Git from the shell (1)
+
+&lt;span style="color:black"&gt;**1. Create a repo on GitHub and initialize with a README.**
+
+&lt;span style="color:black"&gt;**2. Copy the HTTPS/SSH link (the green "Clone or Download" button).**
+
+&lt;span style="color:grey"&gt;3. In RStudio, create a new Project using the following steps: 
+
+&lt;span style="color:grey"&gt;`File -&gt; New Project... -&gt; Version Control -&gt; Git` 
+  
+  &lt;span style="color:grey"&gt;and **clone** the repo to your local machine by pasting your copied link into the "Repository URL:" box.
+  
+```bash
+*$ git clone https://github.com/mabecker89/ABMI-test.git
+```
+  
+&lt;span style="color:grey"&gt;4. Choose the project path (be intentional!) and click **Create Project**.
+
+&lt;span style="color:black"&gt;4. Make this new repo your working directory.
+
+```bash
+*$ cd ABMI-test
+```
+
+---
+# Git from the shell (2)
+
+&lt;span style="color:grey"&gt;5. Make a change to the repo README in RStudio ("Hello World!"). Save it.
+
+```bash
+$ echo "Hello World!!" &gt;&gt; README.md
+```
+
+&lt;span style="color:grey"&gt;6. Click the 'Git' tab in the `Environments, History, Connections .. ` pane.
+
+&lt;span style="color:grey"&gt;7. Click `Commit`.
+
+&lt;span style="color:grey"&gt;8. Click the `Stage` checkbox of the change you want to commit.
+
+```bash
+$ git add -A
+```
+&lt;span style="color:grey"&gt;9. Write a `Commit message`. Be detailed. You never know when you'll need to know what you did in a particular commit. Commit the change.
+
+```bash
+$ git commit -m "my very first line to the README"
+```
+&lt;/span&gt;
+
+---
+count: false
+
+# Git from the shell (2)
+
+&lt;span style="color:grey"&gt;5. Make a change to the repo README in RStudio ("Hello World!"). Save it.
+
+```bash
+*$ echo "Hello World!!" &gt;&gt; README.md
+```
+
+&lt;span style="color:grey"&gt;6. Click the 'Git' tab in the `Environments, History, Connections .. ` pane.
+
+&lt;span style="color:grey"&gt;7. Click `Commit`.
+
+&lt;span style="color:grey"&gt;8. Click the `Stage` checkbox of the change you want to commit.
+
+```bash
+*$ git add -A
+```
+&lt;span style="color:grey"&gt;9. Write a `Commit message`. Be detailed. You never know when you'll need to know what you did in a particular commit. Commit the change.
+
+```bash
+*$ git commit -m "my very first line to the README"
+```
+&lt;/span&gt;
+
+---
+
+# Git from the shell (3)
+
+&lt;span style="color:grey"&gt;6. Click `Pull` to retrieve any changes made by you or a collaborator in the upstream Github repo.
+
+```bash
+$ git pull
+```
+
+&lt;span style="color:grey"&gt;7. Click `Push`, which will send your changes to the remote repo on Github.]
+
+```bash
+$ git push
+```
+
+---
+count: false
+
+# Git from the shell (3)
+
+&lt;span style="color:grey"&gt;6. Click `Pull` to retrieve any changes made by you or a collaborator in the upstream Github repo.
+
+```bash
+*$ git pull
+```
+
+&lt;span style="color:grey"&gt;7. Click `Push`, which will send your changes to the remote repo on Github.]
+
+```bash
+*$ git push
+```
+
+--
+&lt;br&gt;
+### And that's all there is to it. 
+
+... sort of.
+
+We'll go into more depth next time :)
+
+---
+
+# Repo tips
+
+## README.md
+
++ You have the option to include a README when you create a repo in Github - do so!
++ README files act as landing pages for the repo, so you can (should) be explicit about the goals of the project/research, how to the run the analysis, etc. 
++ README's are written in [Markdown](https://www.markdownguide.org/), which Github automatically renders nicely for us.
+
+## .gitignore
+
++ Tell Git what you want to ... ignore.
++ Useful if you have private files you would prefer not to be public (e.g. site location data).
++ Or for very large individual files (&gt;100 MB). These will cause RStudio to 'hang' (i.e. freeze up) when you try to push them to a remote repo&lt;sup&gt;1&lt;/sup&gt;, which you don't want.
++ Just a simple text file (save as .gitignore) in which you write the files you want ignored.  
+
+.footnote[
+&lt;sup&gt;1&lt;/sup&gt; There are [ways to handle large files](https://git-lfs.github.com/) when you're working in the shell, though.]
+
+---
+class: inverse, center, middle
+name: next
+
+# Next Workshop
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
+---
+
+# Next Workshop
+
+Scheduled for October 24, 2019
+
+In the meantime:
++ Make a Github account.
++ Install Git on your local machine.
++ Say hello to Git.
++ Get RStudio and Github talking to one another.
+
+If (when) you run into trouble, holler at me. I will come and sit at your computer and we can troubleshoot together. See the [Resources](#resources) slide for some awesome Git How-To's.
+
+---
+
+# Next Workshop
+
+Scheduled for October 24, 2019
+
+Next time we will:
++ Troubleshoot any issues people had (send me Q's beforehand and I'll go over them). 
++ Introduce some advanced concepts.
++ Discuss potential for incorporating Git into ABMI projects and workflow. 
+
+---
+class: inverse, center, middle
+name: conquer
+
+# Go forth and conquer
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
+---
+name: resources
+
+# Resources
+
+[Happy Git and GitHub for the useR](https://happygitwithr.com/)
+
++ This is an amazing guide, and most of the material in this presentation was borrowed from it. Lots of detail in there about common problems people run into. 
+
+[Software Carpentry - Version Control with Git](https://swcarpentry.github.io/git-novice/)
+
++ Not explicitly focused on R, but a thorough walkthrough of all Git concepts.
+
+[Git Immersion](http://gitimmersion.com/index.html)
+
++ A guided tour through the fundamentals of Git.
+
+&lt;br&gt;
+**Acknowledgements**
+
+Big thanks to [Jenny Bryan](https://github.com/jennybc) et al for their work on Happy Git with R, as well as [Grant McDermott](https://github.com/grantmcdermott) for inspiration on the slides. 
+
+---
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
