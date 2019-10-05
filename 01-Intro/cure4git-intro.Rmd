@@ -221,6 +221,8 @@ But we'll save these concepts for the next workshop(s).
 <img src="pics/git-fire.png" height=420>
 </div>
 
+(First you should `git add .` I think ...)
+
 ---
 class: inverse, center, middle
 name: github
