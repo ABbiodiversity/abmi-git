@@ -39,18 +39,77 @@ So, there's lot of terms that get thrown around: *shell, terminal, tty, command 
 
 ---
 
+# Bash (i.e. Bourne Again Shell)
+
+
+
+---
+
 # Use Shell Commands
 
-```{bash}
+```bash
 git status # Discover which file(s) have been changed since the last save.
+
+git diff # Look at changes.
+
 ```
 
 This is a change.
 
+```bash
+
+git add FILENAME # Add file to staging area.
+
+git commit -m "this is a message"
+
+git log # press spacebar to continue down.
+
+```
+
+---
+
+Every commit to a repository has a unique identifier called a hash. 
+
+```bash
+$ git log # retrieve hash
+
+$ git show # enter first few characters of a hash, or HEAD~X
+
+$ git annotate FILE # shows a list of all the changes to that particular file
+```
+---
+
+# How can I see what changed between two commits?
+
+```bash
+$ git diff HEAD~1..HEAD~2 # can use the hash characters here as well.
+
+```
+
+---
+
+# Flags
+
++ `-r` to compare to a particular revision
+
++ `-ammend` to change the previous commit message
+
+```bash
+$ ls -lh ~/Documents/
+```
 
 
+---
 
+# Text editors
 
+Nano
+
+```bash
+
+nano FILENAME
+
+```
 
 
 
