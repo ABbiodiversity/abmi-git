@@ -695,7 +695,7 @@ name: resources
 
 Big thanks to [Jenny Bryan](https://github.com/jennybc) et al for their work on Happy Git with R, as well as [Grant McDermott](https://github.com/grantmcdermott) for inspiration on the slides. 
 
----
+
 
 
 

@@ -1,0 +1,58 @@
+---
+title: "Git from (S)hell"
+subtitle: "<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
+author: The Alberta Biodiversity Monitoring Institute
+date: # `r format(Sys.time(), '%d %B %Y')`
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts] 
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include = FALSE}
+
+options(htmltools.dir.version = FALSE)
+
+library(knitr)
+
+opts_chunk$set(
+  fig.align="center", #fig.width=6, fig.height=4.5, 
+  # out.width="748px", #out.length="520.75px",
+  dpi=300, #fig.path='Figs/',
+  cache=T#, echo=F, warning=F, message=F
+  )
+
+```
+
+# What the Shell?!
+
+So, there's lot of terms that get thrown around: *shell, terminal, tty, command prompt*, etc.
+
++ They're basically just different names for the same thing.
+
++ They all refer to a **command line interface** (CLI). 
+
+
+---
+
+# Use Shell Commands
+
+```{bash}
+git status # Discover which file(s) have been changed since the last save.
+```
+
+
+
+
+
+
+
+
+
+
+
+
