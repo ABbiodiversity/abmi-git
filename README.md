@@ -6,9 +6,11 @@ This repository is a place for ABMI staff to:
 + Access tutorials
 + Find resources
 
-Slides for the workshops can be viewed here
+Slides for the workshops can be viewed here:
 
 1. [Introduction to Git](https://mabecker89.github.io/cure4git/cure4git-intro.html)
+
+2. Git from (S)hell
 
 ```{r}
 
