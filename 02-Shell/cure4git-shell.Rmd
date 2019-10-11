@@ -41,6 +41,9 @@ So, there's lot of terms that get thrown around: *shell, terminal, tty, command 
 
 # Bash (i.e. Bourne Again Shell)
 
+```bash
+git config --system
+```
 
 
 ---
@@ -54,7 +57,9 @@ git diff # Look at changes.
 
 ```
 
-This is a change.
+Git does not track files by default ... it wants until you've used the add command on them at least once before it starts paying attention.
+
+The `status` command will tell you about files that are in your repo but aren't yet being tracked. 
 
 ```bash
 

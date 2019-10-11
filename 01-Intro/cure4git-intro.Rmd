@@ -143,9 +143,11 @@ A **version control system** is a tool that manages changes made to files and di
 Many exist, but we'll focus on a particularly powerful one: **Git**.
 > If Dropbox and Word's *Track Changes* feature had a baby, Git would be that baby.
 
+Git manages the evolution of a set of files in a highly structured way. 
+
 --
 <br>
-
+<br>
 Why's it useful?
 
 + Nothing that is saved to Git is ever lost, unless you work really hard at it.
@@ -195,8 +197,6 @@ A typical workflow:
 
 <br>
 Conflicts
-
-Cloning
 
 Branches
 
@@ -254,7 +254,8 @@ name: github
 
 In addition to the benefits of rigorous version control and collaboration tool, Git(hub) also helps to operationalize the ideals of open science and reproducibility.
 
-  +  *Nature:* "[Democratic databases: science on GitHub](https://www.nature.com/news/democratic-databases-science-on-github-1.20719)" (Perkel, 2016).
+  +  *Nature:* [Democratic databases: science on GitHub](https://www.nature.com/news/democratic-databases-science-on-github-1.20719) (Perkel, 2016).
+  + *PLOS:* [Ten Simple Rules for Taking Advantage of Git and Github](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004947) (Perez-Riverol et al 2016)
   
 Journals are increasingly moving towards stricter requirements regarding reproducibility and data access. 
 
@@ -290,7 +291,7 @@ name: setup
 ### Install Git on your local machine.
 
   - Depends on the OS you're running, but we'll assume Windows for this tutorial.
-  - [Git for Windows](https://gitforwindows.org/), aka 'Git Bash', is a desirable approach.
+  - [Git for Windows](https://gitforwindows.org/), aka 'Git Bash', is a recommended approach.
   
 .footnote[
 <sup>1</sup> You'll qualify for an educational account while you work for ABMI/UofA.]
@@ -442,6 +443,7 @@ Let's execute them (Well, let RStudio execute them for us).
 <br>
 <br>
 .font120[New Project, Github First]
++ *This is what we just did.*
 
 <br>
 .font120[[Existing Project, Github First](https://happygitwithr.com/existing-github-first.html)]
@@ -566,7 +568,7 @@ count: false
 <span style="color:grey">8. Click the `Stage` checkbox of the change you want to commit.
 
 ```bash
-*$ git add -A
+*$ git add README.md
 ```
 <span style="color:grey">9. Write a `Commit message`. Be detailed. You never know when you'll need to know what you did in a particular commit. Commit the change.
 
@@ -615,6 +617,12 @@ count: false
 ... sort of.
 
 We'll go into more depth next time :)
+
+---
+
+```bash
+$ git init
+```
 
 ---
 
