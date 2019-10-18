@@ -30,13 +30,13 @@ opts_chunk$set(
 
 # Outline of these workshops
 
-### Workshop 1 (October 17, 2019)
+### Workshop 1 (October 21, 2019)
 
 1. [Prologue](#prologue)
 
   .font80[What are we doing here?]
 
-1. [Git](#git)
+1. [Intro to Git](#git)
 
   .font80[Version Control, baby!] 
   
@@ -56,12 +56,13 @@ opts_chunk$set(
 
 # Outline of these workshops
 
-### Workshop 2 (October 24, 2019)
+### Workshop 2 (November, 2019)
 
 - Troubleshoot some setup issues. 
 
 - Go through some more advanced Git operations and workflows.
 
+--
 
 ### Workshop 3 (If desired; TBD)
 
@@ -80,15 +81,13 @@ name: prologue
 
 ---
 
-# Prologue
+# The Highest Ideal
 
-### The Highest Ideal
+<br>
 
 > *The goal is a collaborative, transparent, and efficient approach to our scientific and computational work at the ABMI.* 
 
-
 <br>
-Part of this process will be figuring out how best to structure a collaborative culture within the organization (and with external partners).
 
 We want to operationalize the **reproducibility** of our research.
 
@@ -96,7 +95,9 @@ We want staff to **collaborate** and learn from one another.
 
 <br>
 
-So there isn't a 'right' way for now, but hopefully it will develop over time where staff from all corners of the organization can contribute to and review the scientific products we generate.  
+
+
+Over time, we want staff from all corners of the organization to be able to contribute to and review the scientific products we create, as well as share their own projects.  
 
 ---
 
@@ -152,7 +153,7 @@ Why's it useful?
 
 + Nothing that is saved to Git is ever lost, unless you work really hard at it.
 + Git can synchronize work done by different people on different machines, and notify you when your work conflicts with someone else's. 
-+ Well designed for writing and tracking changes to code ... something we all tend to do a lot of here. 
++ Well designed for writing and tracking changes to code ... a common feature of many of our jobs here. 
 
 ---
 
@@ -178,7 +179,7 @@ Git has a *staging area* in which it stores files with changes you want to save,
 
 ### **Pull**/**Push**<sup>1</sup>
 
-Repositories can be local (on your machine) or *remote*, i.e. hosted online by a service like Github (which we'll chat about tout de suite ...)
+Repositories can be local (on your machine) or *remote*, i.e. hosted online by a service like Github (which we'll chat about right away ...)
 
 A typical workflow:
 
@@ -294,7 +295,7 @@ name: setup
   - [Git for Windows](https://gitforwindows.org/), aka 'Git Bash', is a recommended approach.
   
 .footnote[
-<sup>1</sup> You'll qualify for an educational account while you work for ABMI/UofA.]
+<sup>1</sup> You'll qualify for an educational account while you work for ABMI/UofA, which means you can create an unlimited number of private repos.]
   
 ---
 
@@ -417,10 +418,10 @@ Let's execute them (Well, let RStudio execute them for us).
 ### What did we just do?
 
 .font80[
-+ Made some changes to a file locally ("Look at this wonderful work I've done!")
++ Made some changes to a file locally ("Hello World!")
 + Staged these changes ("These are the wonderful changes I've made!")
 + Committed these local changes to our Git history ("Yes, I'm sure I want these changes.")
-+ Pulled from the remote repo upstream (good practice)
++ Pulled from the remote repo upstream ("Did anyone else do something while I was working?")
 + Pushed our shiny new changes out into the remote repo, accessible to our collaborators ("Look at my wonderful work!")
 ]
 
