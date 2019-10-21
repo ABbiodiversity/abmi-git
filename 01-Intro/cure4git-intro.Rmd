@@ -10,6 +10,7 @@ output:
     nature:
       highlightStyle: github
       highlightLines: true
+      hightlightSpans: true
       countIncrementalSlides: false
 ---
 
@@ -20,6 +21,7 @@ options(htmltools.dir.version = FALSE)
 library(knitr)
 
 opts_chunk$set(
+  #prompt = T,
   fig.align="center", #fig.width=6, fig.height=4.5, 
   # out.width="748px", #out.length="520.75px",
   dpi=300, #fig.path='Figs/',
@@ -48,7 +50,7 @@ opts_chunk$set(
 
   .font80["Hello World!"]
 
-1. [Shell](#shell)
+1. [Git from (S)hell](#shell)
 
   .font80[Looks scary (but isn't.)]
 
@@ -101,7 +103,7 @@ Over time, we want staff from all corners of the organization to be able to cont
 
 ---
 
-# Going Forward
+# Roadmap
 
 **The Plan** (capital T capital P) is to:
 
@@ -113,7 +115,7 @@ Over time, we want staff from all corners of the organization to be able to cont
 
 1. Introduce Git to the workflow of a few projects identified as good candidates.
 
-1. Over time, build our analyses using git as a collaboration tool and version control backstop, accessible by others both within and outside of the organization.
+1. Over time, build our analyses using Git as a collaboration tool and version control backstop, accessible by others both within and outside of the organization.
 
   ... something, something ...
   
@@ -147,7 +149,7 @@ Many exist, but we'll focus on a particularly powerful one: **Git**.
 Git manages the evolution of a set of files in a highly structured way. 
 
 --
-<br>
+
 <br>
 Why's it useful?
 
@@ -261,7 +263,7 @@ In addition to the benefits of rigorous version control and collaboration tool, 
 Journals are increasingly moving towards stricter requirements regarding reproducibility and data access. 
 
   + No more frustrating reads of a tiny Methods section in a dusty old pdf file of a paper where you're trying desparately to understand what they did, step-by-step (.. *breathes heavily* ..).
-  + You can host all the data, code, and writing for papers, projects, and/or reports in one place. Even [workshop materials](https://github.com/mabecker89/cure4git).
+  + You can host all the data, code, and writing for papers, projects, and/or reports in one place. Even [workshop materials](https://github.com/ABbiodiversity/cure4git).
 
 ---
 class: inverse, center, middle
@@ -285,7 +287,7 @@ name: setup
 
 .font80[Note: there are a ton of great Git resources online to you walk you through this process in depth. A bunch are listed in the [Resources](#resources) section at the back of this presentation and in the workshop's repo [README file](https://github.com/mabecker89/cure4git/blob/master/README.md), many of which are heavily borrowed from for this presentation.] 
 
-### Register for a [Github](www.github.com) account.
+### Register for a [Github](https://www.github.com) account.
 
   - It's free! Don't worry about the paid accounts for now<sup>1</sup>.
 
@@ -344,7 +346,7 @@ You can use Git through the RStudio GUI, and in the background it executes the s
 
 <br>
 
-> Because of how easy it is<sup>1</sup>, we'll introduce the use of Git through RStudio in this next section.
+> Because of its simplicity<sup>1</sup>, we'll introduce the use of Git through RStudio in this next section.
 
 .footnote[
 <sup>1</sup> There are reasons why working with Git through RStudio is limiting. We'll touch on those next time when we work through some more advanced concepts.]
@@ -353,11 +355,11 @@ You can use Git through the RStudio GUI, and in the background it executes the s
 
 # General Recipe
 
-.font80[*For new projects*]
+*For new projects*
 
 1. Create a repo on GitHub and initialize with a README.
 
-1. Copy the HTTPS/SSH link (the green "Clone or Download" button).
+1. Copy the HTTPS link (access vis the green "Clone or Download" button).
 
 1. In RStudio, create a new Project using the following steps: 
 
@@ -418,12 +420,14 @@ Let's execute them (Well, let RStudio execute them for us).
 ### What did we just do?
 
 .font80[
-+ Made some changes to a file locally ("Hello World!")
-+ Staged these changes ("These are the wonderful changes I've made!")
-+ Committed these local changes to our Git history ("Yes, I'm sure I want these changes.")
-+ Pulled from the remote repo upstream ("Did anyone else do something while I was working?")
-+ Pushed our shiny new changes out into the remote repo, accessible to our collaborators ("Look at my wonderful work!")
++ Made some changes to a file locally 
++ Staged these changes 
++ Committed these local changes to our Git history
++ Pulled from the remote repo upstream
++ Pushed our shiny new changes out into the remote repo, accessible to our collaborators
 ]
+
+--
 
 ### Why this workflow?
 
@@ -431,11 +435,11 @@ Let's execute them (Well, let RStudio execute them for us).
 + Allows Github to act as the central node in the distributed version control network.
 + Copying project from Github to your machine automatically sets up the local Git repo for you.
 + RStudio Projects interact seamlessly with Git and Github.
-  - .RProj file acts as an anchor point for all other files in the repo, solving absolute vs. relative path problems<sup>1</sup>.
+  - e.g. The .RProj file acts as an anchor point for all other files in the repo, solving absolute vs. relative path problems<sup>1</sup>.
   ]
 
 .footnote[
-<sup>1</sup> .font80[Please don't call files from `"YourComputer/YourName/Documents/SpecialPlace/Sub-Folder/myfile"` in your scripts. An angel loses its wings every time you do. Try `"./myfile"` instead :)]]
+<sup>1</sup> .font80[Please don't call files from `"YourComputer/YourName/Documents/SpecialPlace/Sub-Folder/myfile"` in your scripts. An angel loses its wings every time you do :)]]
 
 ---
 
@@ -456,23 +460,89 @@ Let's execute them (Well, let RStudio execute them for us).
 class: inverse, center, middle
 name: shell
 
-# Shell
+# Git from (S)hell
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
 ---
 
-# Git from the shell
+# What the Shell?!
 
 What's RStudio doing in the background? 
 
 It's executing a series of commands for you. But you can do these yourself.
 
+There's a lot of terms that get thrown around: *shell, terminal, tty, command prompt*, etc.
+
++ They're basically just different names for the same thing (kind of).
++ They all refer to a **command line interface**.
+
+You can type commands to your computer directly, rather than relying on a GUI. 
+
+<br>
 Why bother with the shell?
 
 + The shell is more powerful and flexible. You can do more.
 + Potentially more appropriate for projects that aren't (entirely) based in R.
++ Scripting with the shell is reproducible, while clicking within a GUI is not.
 --
 <br>
 + **You feel like a programming badass.** 
+
+---
+
+# What the Shell?!
+
+There are many shell variants, but we'll focus on [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell) (i.e. **B**ourne-**a**gain **sh**ell).
+
++ Default shell on Linux and MacOS.
++ Windows users should have it installed via [Git for Windows](https://gitforwindows.org/).
+
+When you open up the Bash shell, you'll be greeted by:
+```bash
+username@hostname: ~
+$ 
+```
+
+---
+count: false
+
+# What the Shell?!
+
+There are many shell variants, but we'll focus on [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell) (i.e. **B**ourne-**a**gain **sh**ell).
+
++ Default shell on Linux and MacOS.
++ Windows users should have it installed via [Git for Windows](https://gitforwindows.org/).
+
+When you open up the Bash shell, you'll be greeted by:
+```bash
+*username@hostname: ~ 
+$ 
+```
+Shell-speak for "Who am I and where am I?"
+
+---
+count: false
+
+# What the Shell?!
+
+There are many shell variants, but we'll focus on [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell) (i.e. **B**ourne-**a**gain **sh**ell).
+
++ Default shell on Linux and MacOS.
++ Windows users should have it installed via [Git for Windows](https://gitforwindows.org/).
+
+When you open up the Bash shell, you'll be greeted by:
+```bash
+username@hostname: ~ 
+*$ 
+```
+Shell-speak for "Who am I and where am I?"
+
+The **command prompt**.
+
+--
+
+<br>
+
+You can also access the shell directly through Rstudio: `Shift`+`Alt`+`T` will open up a "Terminal" tab in the Console pane.
 
 ---
 
@@ -542,7 +612,7 @@ $ echo "Hello World!!" >> README.md
 <span style="color:grey">8. Click the `Stage` checkbox of the change you want to commit.
 
 ```bash
-$ git add -A
+$ git add README.md
 ```
 <span style="color:grey">9. Write a `Commit message`. Be detailed. You never know when you'll need to know what you did in a particular commit. Commit the change.
 
@@ -585,13 +655,13 @@ count: false
 <span style="color:grey">6. Click `Pull` to retrieve any changes made by you or a collaborator in the upstream Github repo.
 
 ```bash
-$ git pull
+$ git pull origin master
 ```
 
 <span style="color:grey">7. Click `Push`, which will send your changes to the remote repo on Github.]
 
 ```bash
-$ git push
+$ git push origin master
 ```
 
 ---
@@ -602,13 +672,13 @@ count: false
 <span style="color:grey">6. Click `Pull` to retrieve any changes made by you or a collaborator in the upstream Github repo.
 
 ```bash
-*$ git pull
+*$ git pull origin master
 ```
 
 <span style="color:grey">7. Click `Push`, which will send your changes to the remote repo on Github.]
 
 ```bash
-*$ git push
+*$ git push origin master
 ```
 
 --
@@ -618,12 +688,6 @@ count: false
 ... sort of.
 
 We'll go into more depth next time :)
-
----
-
-```bash
-$ git init
-```
 
 ---
 
@@ -655,13 +719,15 @@ name: next
 
 # Next Workshop
 
-Scheduled for October 24, 2019
+We will schedule it sometime in **November**.
 
-In the meantime:
+In the meantime, some homework:
 + Make a Github account.
 + Install Git on your local machine.
 + Say hello to Git.
-+ Get RStudio and Github talking to one another.
++ Join the [ABbiodiversity](https://github.com/ABbiodiversity) Github organization.
++ Clone in to the [cure4git](https://github.com/ABbiodiversity/cure4git) repository, either via RStudio or the Shell, and practice the recipe in slides 24-27 (write a line in the README).
++ Create a repo for one of your personal or work projects!
 
 If (when) you run into trouble, holler at me. I will come and sit at your computer and we can troubleshoot together. See the [Resources](#resources) slide for some awesome Git How-To's.
 
@@ -669,10 +735,8 @@ If (when) you run into trouble, holler at me. I will come and sit at your comput
 
 # Next Workshop
 
-Scheduled for October 24, 2019
-
-Next time we will:
-+ Troubleshoot any issues people had (send me Q's beforehand and I'll go over them). 
+Next time we will get into some juicier Git topics! 
++ Troubleshoot any issues people had (send me Q's beforehand if you want and I'll make sure to go over them in the slides). 
 + Introduce some advanced concepts.
 + Discuss potential for incorporating Git into ABMI projects and workflow. 
 
