@@ -8,7 +8,7 @@ This repository is a place for ABMI staff to:
 
 **Slides for the workshops can be viewed here:**
 
-1. [Introduction to Git](https://mabecker89.github.io/cure4git/cure4git-intro.html) - October 21, 2019
+1. [Introduction to Git](https://ABbiodiversity.github.io/cure4git/cure4git-intro.html) - October 21, 2019
 
 2. Advanced Git - TBD
 
