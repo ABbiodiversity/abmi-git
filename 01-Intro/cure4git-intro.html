@@ -169,7 +169,7 @@ Git has a *staging area* in which it stores files with changes you want to save,
   
   &gt; It's like putting things in a box that you intend to mail out. 
   
-*Commiting* those changes is like putting that box in the mail. Your changes are saved into the history of your local repo. 
+*Commiting* those changes is like sealing up that box. Your changes are saved into the history of your local repo. 
 
 ---
 
@@ -183,8 +183,11 @@ A typical workflow:
 
   + You *pull* in your collaborators' work from a remote repository so that you have the latest version of everything.
   + You do some work.
-  + You *push* your work back to the remote repository so that your collaborators can access it. 
+  + You *push* your work back to the remote repository so that your collaborators can access it.
 
+&gt; Pushing is like mailing out that box.
+
+&lt;br&gt;
 .footnote[
 &lt;sup&gt;1&lt;/sup&gt; These two commands were intentionally ordered in this way - it's good practice to Pull before you start work on a project, then Push when you're finished, even if you're working alone. If (when) you forget, there will be pain. Best to get in the habit.]
 
@@ -211,16 +214,6 @@ But we'll save these concepts for the next workshop(s).
 &lt;div align="center"&gt;
 &lt;img src="https://imgs.xkcd.com/comics/git.png" height=500&gt;
 &lt;/div&gt;
-
----
-
-# Git (in practice)
-
-&lt;div align="center"&gt;
-&lt;img src="pics/git-fire.png" height=420&gt;
-&lt;/div&gt;
-
-(First you should `git add .` I think ...)
 
 ---
 class: inverse, center, middle
@@ -408,6 +401,12 @@ Let's execute them (Well, let RStudio execute them for us).
 
 &lt;div align="center"&gt;
 &lt;img src="pics/rstudio-commit-push.gif" height=540&gt;
+&lt;/div&gt;
+
+---
+
+&lt;div align="center"&gt;
+&lt;img src="pics/useless-git.png" height=500&gt;
 &lt;/div&gt;
 
 ---
@@ -687,6 +686,15 @@ count: false
 We'll go into more depth next time :)
 
 ---
+# Git from the shell
+
+&lt;div align="center"&gt;
+&lt;img src="pics/git-fire.png" height=420&gt;
+&lt;/div&gt;
+
+(Although you don't want to forget `git add -A` first ...)
+
+---
 
 # Repo tips
 
@@ -759,6 +767,10 @@ name: resources
 [Git Immersion](http://gitimmersion.com/index.html)
 
 + A guided tour through the fundamentals of Git.
+
+[Oh Shit, Git!](https://ohshitgit.com/)
+
++ For when you need a bit of humour during dark Git days.
 
 &lt;br&gt;
 **Acknowledgements**
