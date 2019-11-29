@@ -178,7 +178,7 @@ What's this look like?
 --
 
 <div align="right">
-<img src="pics/commit.png" height=250>
+<img src="pics/commit.PNG" height=250>
 </div>
 
 ---
@@ -188,7 +188,7 @@ What's this look like?
 You can also browse the entire **commit history** of a project.
 
 <div align="center">
-<img src="pics/commit-history.png" height=500>
+<img src="pics/commit-history.PNG" height=500>
 </div>
 
 ---
