@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Introduction to Git - Part II</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="December 4, 2019" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Introduction to Git - Part II
+## <html>
+<div style="float:left">
+
+</div>
+<hr color='#EB811B' size=1px width=796px>
+</html>
+### December 4, 2019
+
+---
+
+
+
+
+# Outline of this workshop
+
+1. [Recap](#recap)
+
+  .font80[What happened last time?]
+  
+2. [Moar Git](#moar)
+
+  .font80[Let's round out our knowledge of the basics!]
+  
+3. [ABMI on Github](#abmi)
+
+  .font80[]
+  
+4. [Useful Github Features](#features)
+
+  .font80[]
+  
+5. [Building Project Websites](#websites)
+
+---
+
+class: inverse, center, middle
+name: recap
+
+# Recap
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
+
+---
+
+# Git - The Basics
+
+[Slides](https://abbiodiversity.github.io/cure4git/cure4git-intro.html#1) for the first workshop.
+
++ Git is a **version control system** that manages changes made to files and directories in a project.
++ Originally created to help groups of people develop software.
++ Git manages the evolution of a set of files in a highly structured way.
+
+--
+&lt;br&gt;
+### Why's it useful to us?
+
++ Nothing that is saved to Git is ever lost, unless you work really hard at it.
++ Synchronizes work done by different people on different machines (i.e., a method to manage a *distributed* workflow)
++ Well designed for writing and tracking changes to code.
++ Helps us back up, share, and conduct QA on our analyses and products.
+
+---
+
+# Key Git Terms (1)
+
+### **Repository**
+
+Git projects have two parts: the files and directories you create and edit directly, and the extra information that Git records about the project's history. 
+
+The combination of these two things is called a **repository**, or *repo* as the cool kids say. 
+
+### **Commit**
+
+You use Git to take snapshots of all the files in a repository.
+
+When you want to take a snapshot of a file or files, you create a **commit**.
+
+&lt;br&gt;
+So [why would I want to do this](https://speakerdeck.com/alicebartlett/git-for-humans?slide=23) silly commit thing instead of just regular 'ol saving?
+
+---
+
+# Commit (cont'd)
+
+When you **commit** a file or files, some information is saved along with the changes to the file:
+
+1. Who
+2. When
+
+Plus, you can (should!) add more information about the changes you've made in a **commit message**.
+
+What's this look like?
+
+--
+
+&lt;div align="right"&gt;
+&lt;img src="pics/commit.PNG" height=250&gt;
+&lt;/div&gt;
+
+---
+
+# Commit (cont'd)
+
+You can also browse the entire **commit history** of a project.
+
+&lt;div align="center"&gt;
+&lt;img src="pics/commit-history.PNG" height=500&gt;
+&lt;/div&gt;
+
+---
+
+# Key Git Terms (2)
+
+### **Remote**
+
+With Git, repositories can be local (on your machine) or **remote**, i.e. hosted online by a service like Github.
+
+How do you interact with a remote repository?
+
+--
+
+### **Clone**
+
+To first retrieve work from a remote, you **clone** the repository onto your local computer.
+
+Now you have a working copy, including the entire project history tracked by Git.
+
+---
+
+# Key Git Terms (2)
+
+### **Pull**/**Push**
+
+Next, you'll want your local version to 'speak' seamlessly with the remote.  
+
+A typical workflow:
+
+  + You **pull** from a remote repository to make sure you have the latest version of everything locally.
+  + You do some work, and commit it.
+  + You **push** your new commits back to the remote repository so that it's backed up there and your collaborators can access it.
+
+--
+
+&lt;br&gt;
+[Let's walk through the process!](https://github.com/beallen/lotic-connectivity_2019-06-07)
+
+---
+class: inverse, center, middle
+name: moar
+
+# Moar Git!
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
+---
+
+# Merge Conflicts
+
+Brandon and I decide to collaborate on a project.
+
++ Brandon: Invites Marcus to join as a collaborator on the Github repo&lt;sup&gt;1&lt;/sup&gt;.
+
++ Marcus: Clones the repo to his local machine, so that they both now have an up-to-date working copy.
+
+Now we both have access and are working simultaneously on files within the repo (e.g. the code, report writing, etc), and **conflicts** may arise.
+
+.font80[.footnote[
+&lt;sup&gt;1&lt;/sup&gt; Can be done via the 'Settings' tab in any Github repo, then 'Collaborators &amp; teams'. A collaborator will have **write** access to a repo, i.e. they can push/pull.]]
+
+--
+
++ Brandon: Makes some edits to a file (README, in this case), then proceeds to stage, commit, and push these changes.
+
++ Marcus: Meanwhile, he also makes changes to the README and attempts to stage, commit, and push them (*after* pulling from the Github repo first).
+
+**What happens?**
+
+.font80[.footnote[
+&lt;sup&gt;1&lt;/sup&gt; Can be done via the 'Settings' tab in any Github repo, then 'Collaborators &amp; teams'. A collaborator will have **write** access to a repo, i.e. they can push/pull.]]
+
+---
+
+# Merge Conflicts
+
+Marcus encounters a `merge conflict` error.
+
+Let's confirm what's going on.
+
+```bash
+$ git status
+```
+
+As part of the response, he should see something like:
+```bash
+Unmerged paths:
+  (use "git add &lt;file&gt;..." to mark resolution)
+  
+   * both modified:   README.md 
+```
+Git is protecting Marcus by refusing the merge. It wants to make sure that he doesn't accidentally overwrite all of his changes by pulling Brandon's version of the README.
+
+- In this case, the source of the problem was obvious. Once we start working on bigger projects, however, `git status` can provide a helpful summary to see which files are in conflict.
+
+---
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"hightlightSpans": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
