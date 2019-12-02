@@ -36,7 +36,6 @@ So, there's lot of terms that get thrown around: *shell, terminal, tty, command 
 
 + They all refer to a **command line interface** (CLI). 
 
-
 ---
 
 # Bash (i.e. Bourne Again Shell)
@@ -113,7 +112,7 @@ A hash is like an absolute path. You can just use the first few characters to id
 
 HEAD refers to the most recent commit. 
 
-```bash
+```
 $ git log # retrieve hash
 
 $ git show # enter first few characters of a hash, or HEAD~X
@@ -156,9 +155,13 @@ The `--` is replaced by the commit hash.
 
 Restoring a file doesn't erase any of the repository's history. Instead, the act of restoring the file is saved as another commit, because you might later want to undo your undoing.
 
-```bash
-$ git log -3 FILENAME # to find the latest three commits involving this file.
-$ git checkout HASH FILENAME # checkout the file using the hash of the version you want to revert back to.
+```
+# To find the latest three commits involving this file:
+$ git log -3 FILENAME 
+
+# Checkout the file using the hash of the version you want to revert back to.
+$ git checkout HASH FILENAME
+
 $ git commit -m "write a message about your new commit"
 ```
 ---
@@ -171,8 +174,9 @@ What happens in one branch does not affect other branches - until you **merge** 
 
 Every Git repository has a branch called `master`.
 
-```bash
-$ git branch # Lists all the branches for you (including master). Star beside branch you're currently in.
+```
+# List all the branches (including master), and star beside branch you're currently in:
+$ git branch 
 
 # Creating a new branch:
 $ git checkout -b new-branch-name # also switches you to that branch.

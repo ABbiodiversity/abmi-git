@@ -34,41 +34,83 @@ So, there's lot of terms that get thrown around: *shell, terminal, tty, command 
 
 + They all refer to a **command line interface** (CLI). 
 
-
 ---
 
 # Bash (i.e. Bourne Again Shell)
 
+```bash
+$ git config --system
+```
 
+---
+
+# Create new Git repository 
+
+```bash
+$ git init new-repo # create new Git repo called new-repo
+
+# For existing projects:
+$ git init # in the project's root directory.
+
+```
+---
+
+# Cloning an existing Git repository
+
+```bash
+$ git clone repo-URL
+```
+
+When you clone a repo, Git remembers where the original repo was. It does this by storing a **remote** in the new repo's configuration. A remote is like a browser bookmark with a name and a URL.
+
+When you clone a repo, Git automatically creates a remote called `origin` that points to the original repo.
+
+Git keeps track of remote repos so that you can **pull** changes from those repos and **push** changes to them.
+
+```bash
+$ git pull origin master # you can specify which remote (origin, in this case) and which branch.
+```
+
+Always commit your local changes if you want `git pull` to run smoothly.
+
+```bash
+$ git push origin master
+```
 
 ---
 
 # Use Shell Commands
 
 ```bash
-git status # Discover which file(s) have been changed since the last save.
+$ git status # Discover which file(s) have been changed since the last save.
 
-git diff # Look at changes.
+$ git diff # Look at changes.
 
 ```
 
-This is a change.
+Git does not track files by default ... it wants until you've used the add command on them at least once before it starts paying attention.
+
+The `status` command will tell you about files that are in your repo but aren't yet being tracked. 
 
 ```bash
 
-git add FILENAME # Add file to staging area.
+$ git add FILENAME # Add file to staging area.
 
-git commit -m "this is a message"
+$ git commit -m "this is a message"
 
-git log # press spacebar to continue down.
+$ git log # press spacebar to continue down.
 
 ```
 
 ---
 
-Every commit to a repository has a unique identifier called a hash. 
+Every commit to a repository has a unique identifier called a hash.
 
-```bash
+A hash is like an absolute path. You can just use the first few characters to identify a hash (usually)
+
+HEAD refers to the most recent commit. 
+
+```
 $ git log # retrieve hash
 
 $ git show # enter first few characters of a hash, or HEAD~X
@@ -82,6 +124,72 @@ $ git annotate FILE # shows a list of all the changes to that particular file
 ```bash
 $ git diff HEAD~1..HEAD~2 # can use the hash characters here as well.
 
+```
+
+---
+
+# Undo changes
+
+To a file that has yet to be staged:
+
+```bash
+$ git checkout -- FILENAME # Will discard changes that have not been staged.
+```
+
+To a file that's already been staged:
+
+```bash
+$ git reset FILENAME # removes files from staging area.
+$ git checkout -- FILENAME
+
+# To put all files in your current directory back to their previous state:
+$ git checkout -- . # the '.' is a placeholder for current directory. 
+```
+---
+
+`git checkout` is used to undo the changes that you made since the last commit. This command can be used to go back even further into a file's history and restore versions of that file from a commit. 
+
+The `--` is replaced by the commit hash. 
+
+Restoring a file doesn't erase any of the repository's history. Instead, the act of restoring the file is saved as another commit, because you might later want to undo your undoing.
+
+```
+# To find the latest three commits involving this file:
+$ git log -3 FILENAME 
+
+# Checkout the file using the hash of the version you want to revert back to.
+$ git checkout HASH FILENAME
+
+$ git commit -m "write a message about your new commit"
+```
+---
+
+# Branches
+
+What is a **branch**? Branches allow you to have multiple versions of your work, and lets you track each version systematically. 
+
+What happens in one branch does not affect other branches - until you **merge** them back together.
+
+Every Git repository has a branch called `master`.
+
+```shell
+$ git branch # Lists all the branches for you (including master). Star beside branch you're currently in.
+
+# Creating a new branch:
+$ git checkout -b new-branch-name # also switches you to that branch.
+
+# Differences between two branches:
+$ git diff new-branch-name..master
+
+```
+---
+
+# Merging branches
+
+When you merge one branch (source) into another (destination), Git incorporates the changes made to the source branch into the destination branch. If those changes don't overlap, the result is a new commit in the destination branch that includes everything from the source branch. 
+
+```bash
+$ git merge new-branch-name master # no '..' required.
 ```
 
 ---
