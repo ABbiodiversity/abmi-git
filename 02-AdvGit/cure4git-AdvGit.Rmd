@@ -1,0 +1,78 @@
+---
+title: "Introduction to Git(hub)"
+subtitle: "<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
+author: November 29, 2019
+date: # `r format(Sys.time(), '%d %B %Y')`
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts] 
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      hightlightSpans: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include = FALSE}
+
+options(htmltools.dir.version = FALSE)
+
+library(knitr)
+
+opts_chunk$set(
+  #prompt = T,
+  fig.align="center", #fig.width=6, fig.height=4.5, 
+  # out.width="748px", #out.length="520.75px",
+  dpi=300, #fig.path='Figs/',
+  cache=T#, echo=F, warning=F, message=F
+  )
+
+```
+
+# Outline of this workshop
+
+1. [Recap](#recap)
+
+  .font80[What happened last time?]
+  
+2. [Moar Git](#moar)
+
+  .font80[Rounding out our knowledge of the basics]
+  
+3. [ABMI on Github](#abmi)
+
+  .font80[]
+  
+4. [Useful Github Features](#features)
+
+  .font80[]
+  
+5. [Building Project Websites](#websites)
+
+---
+
+class: inverse, center, middle
+name: recap
+
+# Recap
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
