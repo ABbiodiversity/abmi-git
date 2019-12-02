@@ -32,23 +32,19 @@ opts_chunk$set(
 
 # Outline of this workshop
 
-1. [Recap](#recap)
+#### 1. [Recap](#recap)
 
-  .font80[What happened last time?]
+ What happened last time?
   
-2. [Moar Git](#moar)
+#### 2. [Moar Git](#moar)
 
-  .font80[Let's round out our knowledge of the basics!]
+Conflicts, forks, and branches, oh my!
   
-3. [ABMI on Github](#abmi)
+#### 3. [ABMI on Github](#abmi)
 
-  .font80[]
+Building our presence
   
-4. [Useful Github Features](#features)
-
-  .font80[]
-  
-5. [Building Project Websites](#websites)
+#### 4. [Useful Github Features](#features)
 
 ---
 
@@ -70,6 +66,7 @@ name: recap
 + Git manages the evolution of a set of files in a highly structured way.
 
 --
+
 <br>
 ### Why's it useful to us?
 
@@ -197,7 +194,7 @@ Now we both have access and are working simultaneously on files within the repo 
 
 ---
 
-# Merge Conflicts
+# Merge Conflicts (cont'd)
 
 Marcus encounters a `merge conflict` error.
 
@@ -209,16 +206,270 @@ $ git status
 
 As part of the response, he should see something like:
 ```bash
+Your branch and 'origin/master' have diverged.
+
 Unmerged paths:
   (use "git add <file>..." to mark resolution)
   
    * both modified:   README.md 
 ```
+--
+
 Git is protecting Marcus by refusing the merge. It wants to make sure that he doesn't accidentally overwrite all of his changes by pulling Brandon's version of the README.
 
 - In this case, the source of the problem was obvious. Once we start working on bigger projects, however, `git status` can provide a helpful summary to see which files are in conflict.
 
 ---
+
+# Merge Conflicts (cont'd)
+
+Okay, let's see what's happening here by opening up the README file. RStudio is a good choice, although your preferred text editor is fine.
+
+You should see something like:
+```bash
+# README
+Some text here.
+<<<<<<< HEAD
+Text added by Brandon.
+=======
+Text added by Marcus.
+>>>>>>> 9601a7dea9cbb90bfea4f5b812d492b758b46a18.
+More text here.
+```
+
+---
+
+# Merge Conflicts (cont'd)
+
+What do these demarcations mean?
+
+```bash
+# README
+Some text here.
+<<<<<<< HEAD
+Text added by Brandon.
+=======
+Text added by Marcus.
+>>>>>>> 9601a7dea9cbb90bfea4f5b812d492b758b46a18.
+More text here.
+```
+---
+count:false
+# Merge Conflicts (cont'd)
+
+What do these demarcations mean?
+
+```bash
+# README
+Some text here.
+*<<<<<<< HEAD
+Text added by Brandon.
+=======
+Text added by Marcus.
+>>>>>>> 9601a7dea9cbb90bfea4f5b812d492b758b46a18.
+More text here.
+```
+
++ `<<<<<<< HEAD` indicates the start of the merge conflict
+
+---
+count:false
+# Merge Conflicts (cont'd)
+
+What do these demarcations mean?
+
+```bash
+# README
+Some text here.
+<<<<<<< HEAD
+Text added by Brandon.
+*=======
+Text added by Marcus.
+>>>>>>> 9601a7dea9cbb90bfea4f5b812d492b758b46a18.
+More text here.
+```
+
++ `<<<<<<< HEAD` indicates the start of the merge conflict
++ `=======` indicates the break point used for comparison.
+
+---
+count:false
+# Merge Conflicts (cont'd)
+
+What do these demarcations mean?
+
+```bash
+# README
+Some text here.
+<<<<<<< HEAD
+Text added by Brandon.
+=======
+Text added by Marcus.
+*>>>>>>> 9601a7dea9cbb90bfea4f5b812d492b758b46a18.
+More text here.
+```
+
++ `<<<<<<< HEAD` indicates the start of the merge conflict
++ `=======` indicates the break point used for comparison.
++ `>>>>>>> <long string>` indicates the end of the lines that had a merge conflict.
+
+Note: This string is called a **hash**. Every commit to a repository has a unique computer-generated identifier called a hash.
+
+---
+
+# Merge Conflicts (cont'd)
+
+Fixing these conflicts is a simple matter of manually editing the README file.
+
++ Delete the lines that you don't want.
++ Delete the special Git merge conflict symbols.
+
+Then:
+
+```bash
+$ git add README.md # to make the resolution
+
+$ git commit -m "resolved message" # to conclude the merge
+```
+
+Now Marcus can push his changes to the Github repo without any errors.
+
+---
+
+# Merge Conflicts (cont'd)
+
+### n.b.
+
++ Marcus gets to decide what to keep because he fixed the merge conflict.
+
++ However, the full commit history is preserved, so Brandon can always recover his changes if desired (or he disagrees!) - we'll talk about how to do so next.
+
++ A more elegant solution to these conflicts is provided by Git **branches** (which we'll talk about *next* next).
+
+---
+
+# Checkout
+
+What if you want to restore a previous version of your file?
+
+--
+
+Find the latest commits involving the README (three in this case):
+
+```bash
+$ git log -3 README.md # Retrieve hash of offending commit 
+```
+--
+
+Inspect the changes that were made in that commit:
+
+```bash
+$ git show HASH 
+```
+
+--
+
+We can use `git checkout` to restore the file to the version in that commit.
+
+```bash
+$ git checkout -- HASH README.md
+# specify the file in case multiple were changed in that commit
+```
+
+--
+
++ Restoring a file doesn't erase any of the repo's history.
++ Instead, the act of restoring the file is saved as another commit, because you might later want to undo your undoing :)
+
+---
+
+# Branches
+
+What are **branches**?
+
++ Branches allow you to have multiple versions of your work, and lets you track each version systematically.
+
++ Branches allow you to take a snapshot of your existing repo and try out a whole new idea *without affecting* your main (i.e. "master") branch.
+
++ Only once you (and your collaborators) are 100% satisfied would you merge it back into the master branch.
+  - This is how most new features in modern software and apps are developed.
+  - Helps to catch and fix bugs.
+  - Researchers - like us! - can easily use this feature to try out new ideas and analysis (e.g. robustness checks, requested revisions, etc.)
+
++ If you aren't happy with an experimental branch, just delete it, safe with the knowledge that your precious master branch will be unaffected. 
+
+---
+
+# Branches
+
+No, seriously what is a **branch** though?
+
+At its core, a branch is a moveable label attached to a commit.
+
+[Conceptually, this is what a project with multiple branches looks like.](https://speakerdeck.com/alicebartlett/git-for-humans?slide=55)
+
+---
+
+# Branches
+
+Creating a new branch is simple in the shell:
+
+```bash
+$ git checkout -b new-branch-name
+```
+
+Push the new branch to the remote on Github (called `origin`):
+
+```bash
+$ git push origin new-branch-name
+```
+
+Switch back to master branch:
+
+```bash
+$ git checkout master
+```
+
+List all the branches in your local repo:
+
+```bash
+$ git branch
+master # a star will appear beside the branch you're currently in
+new-branch-name
+```
+This is all very simple to do within RStudio, too. 
+
+---
+
+# Merging Branches
+
+You have two options:
+
+### 1. Locally
+
++ Commit your final changes to the new branch (called "new-branch")
++ Switch back to the master branch
++ Merge in the new-branch changes: `$ git merge new-branch master`
++ Delete the new-branch (optional): `$ git branch -d new-branch`
+
+---
+
+# Merging Branches
+
+You have two options:
+
+### 2. Remotely (i.e. *pull requests* on Github)
+
++ PRs are a way to notify collaborators - or yourself - that you have completed a feature.
++ You write a summary of all the changes contained in the branch.
++ You then assign suggested reviewers of your code - including yourself potentially - who are then able to approve these changes ("Merge pull request").
+
+
+
+
+
+
+
 
 
 
