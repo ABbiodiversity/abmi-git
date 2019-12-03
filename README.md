@@ -32,6 +32,4 @@ Git from (S)hell
 
 - [Git Immersion](http://gitimmersion.com/index.html)
 
----
-
-Line for the new branch. 
+- [A Successful Git Branching Model](https://nvie.com/posts/a-successful-git-branching-model/)
