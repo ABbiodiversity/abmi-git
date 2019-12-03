@@ -464,7 +464,72 @@ You have two options:
 + You write a summary of all the changes contained in the branch.
 + You then assign suggested reviewers of your code - including yourself potentially - who are then able to approve these changes ("Merge pull request").
 
+---
 
+# Forks
+
+(One last term to learn!)
+
+**Forking** is kind of a hybrid between cloning a repo and branching from it.
+
+When you fork an existing repository, you create an *independent* copy of it under your own Github account.
+
+Once you fork a repo, you are free to do anything you want to it (it's yours). [Example](https://github.com/mabecker89/leaflet/tree/crosstalk6).
+
+--
+
+Forking, in combination with pull requests, is a powerful way to develop software (and other research projects). For example:
+
++ Brandon wants to add a new feature (or fix a bug he's identified) to Peter's [`cure4insect`](https://github.com/ABbiodiversity/cure4insect) package.
++ Brandon can fork the repo where `cure4insect` is hosted, add the code required, and then issue an [upstream pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork).
++ Peter is notified and can then decide whether to merge Brandon's contribution with the main project.
+
+---
+
+# Speaking the Git language
+
+### Key terms we've covered over the last two sessions:
+
+**repository** your project directory/folder
+
+**commit** a snapshot of the current state of the repo
+
+**hash** a unique id for each commit
+
+**checkout** time travel to a specific commit
+
+**remote** a copy of the repo hosted elsewhere
+
+**clone** get the repo from the remote for the first time
+
+**push** send commits to a remote
+
+**pull** get commits from a remote
+
+**branch** a moveable label that points to a commit
+
+**merge** combining two branches
+
+---
+
+class: inverse, center, middle
+name: abmi
+
+# ABMI on Github
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
+
+---
+
+Screenshot of ABMI Organization Page
+
++ We're eight members strong now!
+
++ Some advice:
+  - Please change your preferences to visible
+  - Put some personal information
+  
++ We're going to start organizing into teams.
 
 
 
