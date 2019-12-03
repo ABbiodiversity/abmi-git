@@ -36,15 +36,17 @@ opts_chunk$set(
 
  What happened last time?
   
-#### 2. [Moar Git](#moar)
+#### 1. [Moar Git](#moar)
 
 Conflicts, forks, and branches, oh my!
+
+#### 1. [Useful Github Features](#features)
+
+"Social coding"
   
-#### 3. [ABMI on Github](#abmi)
+#### 1. [ABMI on Github](#abmi)
 
 Building our presence
-  
-#### 4. [Useful Github Features](#features)
 
 ---
 
@@ -129,7 +131,7 @@ You can also browse the entire **commit history** of a project.
 
 ### **Remote**
 
-With Git, repositories can be local (on your machine) or **remote**, i.e. hosted online by a service like Github.
+With Git, repositories can be local (on your machine) or **remote**, i.e. hosted online by a service like [Github](https://github.com/).
 
 How do you interact with a remote repository?
 
@@ -513,6 +515,50 @@ Forking, in combination with pull requests, is a powerful way to develop softwar
 ---
 
 class: inverse, center, middle
+name: features
+
+# Useful Github Features
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
+
+---
+
+# Github Features
+
+### 1. Single Users, Teams, and Organizations
+
++ Like any other social network, users are the central element of Github.
++ You can follow other users or even projects you're interested in.
++ You can add other users as collaborators to your repos.
++ Github Organizations are a great way to congregate users and projects within an organization, manage permissions, and coordinate work.
+
+--
+
+### 2. Collaboratively Discuss, Address, and Close Issues
+
++ Github *Issues* are a great way to keep track of tasks, feature requests, and bugs.
++ Uses a tagging system to cross-reference users, other issues, projects, etc.
+
+---
+
+# Github Features
+
+### 3. Use Github to promote projects
+
++ Set up [Github Pages](https://pages.github.com/) as a rudimentary website for your project.
+
+--
+
+<br>
+
+### 4. Integrate and Automate 
+
++
++
+
+---
+
+class: inverse, center, middle
 name: abmi
 
 # ABMI on Github
@@ -521,17 +567,37 @@ name: abmi
 
 ---
 
-Screenshot of ABMI Organization Page
+# Organizational Page
 
-+ We're eight members strong now!
+[Alberta Biodiversity Monitoring Institute](https://github.com/ABbiodiversity)<sup>1</sup>
 
-+ Some advice:
-  - Please change your preferences to visible
-  - Put some personal information
+.footnote[
+<sup>1</sup> Here's an example of a very robust, active organizational page: [BC Gov](https://github.com/bcgov).] 
+
+--
+
++ We're eight members strong now! Join us :)
+
++ Some Marcus musings:
+  - Please change your 'Organizational Visibility' to Public (default is Private)
+  - Include a picture and some personal information in your profile. Let the world know who we are.
+  - Make your repos public, and either transfer ownership or link to the ABMI organizational page.
   
-+ We're going to start organizing into teams.
+---
 
+# Organizational Page
 
+Cool additions in the works:
+- Species Manual - An introduction to ABMI species data, models, and prediction.
+- Repo of scripts that can be used to access the Wildtrax database.
+- New individual repos for core SC analyses: wetlands, mammals, etc. 
+
+We're going to start organizing into teams and projects:
+  - By Center?
+  - Projects: e.g. BDQT
+
+.footnote[
+<sup>1</sup> Here's an example of a very robust, active organizational page: [BC Gov](https://github.com/bcgov).] 
 
 
 
