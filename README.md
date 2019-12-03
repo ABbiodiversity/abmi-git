@@ -2,7 +2,7 @@
 
 This repository is a place for ABMI staff to:
 
-+ Practice and refine their git wizardry
++ Practice and refine their git abilities
 + Access tutorials
 + Find resources
 
