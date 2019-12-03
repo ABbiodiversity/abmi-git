@@ -12,7 +12,7 @@ This repository is a place for ABMI staff to:
 
   + 1.1 [Introduction to Git - Bayne Lab](https://ABbiodiversity.github.io/cure4git/cure4git-Intro-BayneLab.html)
 
-2. Advanced Git - TBD
+2. [Advanced Git](https://ABbiodiversity.github.io/cure4git/cure4git-AdvGit.html) - December 4, 2019
 
 3. ABMI Git - TBD
 
