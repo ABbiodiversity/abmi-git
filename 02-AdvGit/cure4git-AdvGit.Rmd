@@ -94,7 +94,7 @@ You use Git to take snapshots of all the files in a repository.
 When you want to take a snapshot of a file or files, you create a **commit**.
 
 <br>
-So [why would I want to do this](https://speakerdeck.com/alicebartlett/git-for-humans?slide=23) silly commit thing instead of just regular 'ol saving?
+So [why would I want to do this](https://speakerdeck.com/alicebartlett/git-for-humans?slide=22) silly commit thing instead of just regular 'ol saving?
 
 ---
 
@@ -553,8 +553,7 @@ name: features
 
 ### 4. Integrate and Automate 
 
-+
-+
+
 
 ---
 
@@ -576,7 +575,7 @@ name: abmi
 
 --
 
-+ We're eight members strong now! Join us :)
++ We're ~~eight~~ nine members strong now! Join us :)
 
 + Some Marcus musings:
   - Please change your 'Organizational Visibility' to Public (default is Private)
@@ -595,7 +594,7 @@ Cool additions in the works:
 
 We're going to start organizing into teams and projects:
   - By Center?
-  - Projects: e.g. BDQT
+  - Projects: e.g. BDQT, BMF
   
 --
 
