@@ -11,3 +11,6 @@ forcats
 knitr
 usethis
 xaringan
+xaringanthemer
+leaflet
+DT
