@@ -16,12 +16,6 @@ This repository is a place for ABMI staff (and friends!) to:
 
 ---
 
-**Supplementary Materials:**
-
-Git from (S)hell
-
----
-
 **Helpful Resources:**
 
 - [Happy Git and GitHub for the useR](https://happygitwithr.com/)
