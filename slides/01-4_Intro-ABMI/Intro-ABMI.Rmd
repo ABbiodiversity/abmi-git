@@ -84,7 +84,7 @@ name: prologue
 ### Our needs as researchers, data scientists, developers, etc:
 <br>
 
-.font120[1. **A structured way to manage our projects**.
+.font110[1. **A structured way to manage our projects**.
 
 2. **Ability to experiment with changes, and travel back in time if we need to.**
 
@@ -106,7 +106,7 @@ count: false
 ### Our needs as researchers, data scientists, developers, etc:
 <br>
 
-.font120[1. A structured way to manage our projects.
+.font110[1. A structured way to manage our projects.
 
 2. Ability to experiment with changes, and travel back in time if we need to.
 
@@ -199,8 +199,13 @@ What's this look like?
 You can also browse the entire **commit history** of a project.
 
 <div align="center">
-<img src="pics/commit-history.PNG" height=500>
+<img src="pics/commit-history.PNG" height=400>
 </div>
+
+<br>
+
+.footnote[
+<sup>1</sup> There's a much [more fun way](http://starlogs.net/) to do this.]
 
 ---
 
@@ -258,6 +263,21 @@ A typical workflow:
 <br>
 .footnote[
 <sup>1</sup> These two commands were intentionally ordered in this way - it's good practice to Pull before you start work on a project, then Push when you're finished, even if you're working alone. If (when) you forget, there will be pain. Best to get in the habit.] 
+
+---
+# Git (in practice)
+
+### One problem ... 
+
+--
+
+#### ... it's super unfriendly to use (at first)
+
+<br>
+
+<div align="center">
+<img src="pics/torvals.png" height=320>
+</div>
 
 ---
 
@@ -477,7 +497,7 @@ gitcreds::gitcreds_set()
 class: inverse, center, middle
 name: rstudio
 
-# Project setup with RStudio
+# Project setup with R(Studio)
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
 
@@ -490,6 +510,23 @@ A wonderful aspect of RStudio is how well it integrates version control into you
 Git is a separate program to R, but RStudio connects them so well that you feel they are part of the same ecosystem.
 
 You can use Git through the RStudio GUI, and in the background it executes the shell commands for you.
+
+---
+
+# Seamless Integration
+
+So let's ... git 'r done. 
+
+<div align="center">
+<img src="pics/gitrdone.jpeg" height=500 align="left">
+</div>
+
+--
+
+<div align="center">
+<img src="pics/closeup.png" height=300>
+</div>
+
 
 ---
 
@@ -625,8 +662,8 @@ Let's execute them (Well, let RStudio execute them for us).
 + Make a Github account if you don't have one.
 + Install Git on your local machine.
 + Say hello to Git.
-+ Configure your credentials with a PAT.
-+ Create a personal repository and make sure you can push/pull.
++ Configure your Github credentials with a PAT.
++ Create a personal repository and make sure you can push/pull a few small changes.
 
 If (when) you run into trouble, holler at Brandon or myself. We will help you troubleshoot. See the [Resources](#resources) slide for some awesome Git How-To's.
 
