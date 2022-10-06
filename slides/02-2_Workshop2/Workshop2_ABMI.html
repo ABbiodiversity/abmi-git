@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Workshop2_ABMI.knit</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="October 5, 2022" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Introduction to Git(hub) - Part II
+<html>
+<div style="float:left">
+
+</div>
+<hr color='#EB811B' size=1px width=796px>
+</html>
+]
+.author[
+### October 5, 2022
+]
+
+---
+
+
+
+
+# Outline of this workshop
+
+### Workshop 2 (Today! Right now!)
+&lt;br&gt;
+.font130[1. [Recap](#recap)
+
+1. [Navigating a Commit History](#navigate)
+  
+1. [Collaboration and Conflicts](#cc)
+
+1. [Dictionary](#terms)]
+
+---
+
+class: inverse, center, middle
+name: recap
+
+# Recap
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
+
+---
+
+# Key Git Terms (1)
+
+### **Repository**
+
+Git projects have two parts: the files and directories you create and edit directly, and the extra information that Git records about the project's history. 
+
+The combination of these two things is called a **repository**, or *repo* as the cool kids say. 
+
+### **Commit**
+
+You use Git to take snapshots of all the files in a repository.
+
+When you want to take a snapshot of a file or files, you create a **commit**.
+
+---
+
+# Commit (cont'd)
+
+When you **commit** a file or files, some information is saved along with the changes to the file:
+
+1. Who
+2. When
+
+Plus, you can (should!) add more information about the changes you've made in a **commit message**.
+
+# Key Git Terms (2)
+
+### **Remote**
+
+With Git, repositories can be local (on your machine) or **remote**, i.e. hosted online by a service like [Github](https://github.com/).
+
+How do you interact with a remote repository?
+
+--
+
+### **Clone**
+
+To first retrieve work from a remote, you **clone** the repository onto your local computer.
+
+Now you have a working copy, including the entire project history tracked by Git.
+
+---
+
+# Key Git Terms (2)
+
+### **Pull**/**Push**
+
+Next, you'll want your local version to 'speak' seamlessly with the remote.  
+
+A typical workflow:
+
+  + You **pull** from a remote repository to make sure you have the latest version of everything locally.
+  + You do some work, and commit it.
+  + You **push** your new commits back to the remote repository so that it's backed up there and your collaborators can access it.
+  
+--
+
+### **Let's try doing this in the Terminal!**
+
+---
+
+class: inverse, center, middle
+name: navigate
+
+# Navigating the Commit History
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
+
+---
+
+# Checkout
+
+What if you want to restore a previous version of your file?
+
+--
+
+Find the latest commits involving the README (three in this case):
+
+```bash
+$ git log -3 README.md # Retrieve hash of offending commit 
+```
+--
+
+Inspect the changes that were made in that commit:
+
+```bash
+$ git show HASH 
+```
+
+--
+
+We can use `git checkout` to restore the file to the version in that commit.
+
+```bash
+$ git checkout -- HASH README.md
+# specify the file in case multiple were changed in that commit
+```
+
+--
+
++ Restoring a file doesn't erase any of the repo's history.
++ Instead, the act of restoring the file is saved as another commit, because you might later want to undo your undoing :)
+
+---
+
+class: inverse, center, middle
+name: cc
+
+# Collaborations and Conflicts
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
+
+---
+
+# Merge Conflicts
+
+Marcus and I decide to collaborate on a project.
+
++ Brandon: Invites Marcus to join as a collaborator on the Github repo&lt;sup&gt;1&lt;/sup&gt;.
+
++ Marcus: Clones the repo to his local machine, so that they both now have an up-to-date working copy.
+
+Now we both have access and are working simultaneously on files within the repo (e.g. the code, report writing, etc) ... and **conflicts** may arise.
+
+.font80[.footnote[
+&lt;sup&gt;1&lt;/sup&gt; Can be done via the 'Settings' tab in any Github repo, then 'Collaborators &amp; teams'. A collaborator will have **write** access to a repo, i.e. they can push/pull.]]
+
+--
+
++ Marcus: Makes some edits to a file (Text file, in this case), then proceeds to stage, commit, and push these changes.
+
++ Brandon: Meanwhile, he also makes changes to the Text file and attempts to stage, commit, and push them (*after* pulling from the Github repo first).
+
+**What happens?**
+
+.font80[.footnote[
+&lt;sup&gt;1&lt;/sup&gt; Can be done via the 'Settings' tab in any Github repo, then 'Collaborators &amp; teams'. A collaborator will have **write** access to a repo, i.e. they can push/pull.]]
+
+---
+
+# Merge Conflicts (cont'd)
+
+Brandon encounters a `merge conflict` error.
+
+Let's confirm what's going on.
+
+```bash
+$ git status
+```
+
+As part of the response, he should see something like:
+```bash
+Your branch and 'origin/main' have diverged.
+
+Unmerged paths:
+  (use "git add &lt;file&gt;..." to mark resolution)
+  
+   * both modified:   merge-conflixt.txt 
+```
+--
+
+Git is protecting Brandon by refusing the merge. It wants to make sure that he doesn't accidentally overwrite all of his changes by pulling Marcus' version of the README.
+
+- In this case, the source of the problem was obvious. Once we start working on bigger projects, however, `git status` can provide a helpful summary to see which files are in conflict.
+
+---
+
+# Merge Conflicts (cont'd)
+
+Okay, let's see what's happening here by opening up the Text file. RStudio is a good choice, although your preferred text editor is fine.
+
+You should see something like:
+```bash
+# README
+Some text here.
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Text added by Marcus.
+=======
+Text added by Brandon.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 9601a7dea9cbb90bfea4f5b812d492b758b46a18.
+More text here.
+```
+
+---
+
+# Merge Conflicts (cont'd)
+
+What do these demarcations mean?
+
+```bash
+# README
+Some text here.
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Text added by Marcus.
+=======
+Text added by Brandon.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 9601a7dea9cbb90bfea4f5b812d492b758b46a18.
+More text here.
+```
+---
+count:false
+# Merge Conflicts (cont'd)
+
+What do these demarcations mean?
+
+```bash
+# README
+Some text here.
+*&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Text added by Marcus.
+=======
+Text added by Brandon.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 9601a7dea9cbb90bfea4f5b812d492b758b46a18.
+More text here.
+```
+
++ `&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD` indicates the start of the merge conflict
+
+---
+count:false
+# Merge Conflicts (cont'd)
+
+What do these demarcations mean?
+
+```bash
+# README
+Some text here.
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Text added by Marcus.
+*=======
+Text added by Brandon.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 9601a7dea9cbb90bfea4f5b812d492b758b46a18.
+More text here.
+```
+
++ `&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD` indicates the start of the merge conflict
++ `=======` indicates the break point used for comparison.
+
+---
+count:false
+# Merge Conflicts (cont'd)
+
+What do these demarcations mean?
+
+```bash
+# README
+Some text here.
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Text added by Marcus.
+=======
+Text added by Brandon.
+*&gt;&gt;&gt;&gt;&gt;&gt;&gt; 9601a7dea9cbb90bfea4f5b812d492b758b46a18.
+More text here.
+```
+
++ `&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD` indicates the start of the merge conflict
++ `=======` indicates the break point used for comparison.
++ `&gt;&gt;&gt;&gt;&gt;&gt;&gt; &lt;long string&gt;` indicates the end of the lines that had a merge conflict.
+
+Note: This string is called a **hash**. Every commit to a repository has a unique computer-generated identifier called a hash.
+
+---
+
+# Merge Conflicts (cont'd)
+
+Fixing these conflicts is a simple matter of manually editing the README file.
+
++ Delete the lines that you don't want.
++ Delete the special Git merge conflict symbols.
+
+Then:
+
+```bash
+$ git add merge-conflict.txt # to make the resolution
+
+$ git commit -m "resolved message" # to conclude the merge
+```
+
+Now Brandon can push his changes to the Github repo without any errors.
+
+---
+
+# Merge Conflicts (cont'd)
+
+### n.b.
+
++ Brandon gets to decide what to keep because he fixed the merge conflict.
+
++ However, the full commit history is preserved, so Marcus can always recover his changes if desired (or he disagrees!).
+
++ A more elegant solution to these conflicts is provided by Git **branches** (which we'll talk about *next* next).
+
+---
+
+class: inverse, center, middle
+name: terms
+
+# Dictionary
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
+
+---
+
+# Speaking the Git language
+
+### Key terms we've covered over the last two sessions:
+
+**repository** your project directory/folder
+
+**commit** a snapshot of the current state of the repo
+
+**hash** a unique id for each commit
+
+**log**
+
+**checkout** time travel to a specific commit
+
+**switch**
+
+**remote** a copy of the repo hosted elsewhere
+
+**clone** get the repo from the remote for the first time
+
+**push** send commits to a remote
+
+**pull** get commits from a remote
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"hightlightSpans": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

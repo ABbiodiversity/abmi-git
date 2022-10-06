@@ -1,0 +1,386 @@
+---
+title: "Introduction to Git(hub) - Part II <html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
+author: October 5, 2022
+date: # `r format(Sys.time())
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts] 
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      hightlightSpans: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include = FALSE}
+
+options(htmltools.dir.version = FALSE)
+
+library(knitr)
+
+opts_chunk$set(
+  #prompt = T,
+  fig.align="center", #fig.width=6, fig.height=4.5, 
+  # out.width="748px", #out.length="520.75px",
+  dpi=300, #fig.path='Figs/',
+  cache=T#, echo=F, warning=F, message=F
+  )
+
+```
+
+# Outline of this workshop
+
+### Workshop 2 (Today! Right now!)
+<br>
+.font130[1. [Recap](#recap)
+
+1. [Navigating a Commit History](#navigate)
+  
+1. [Collaboration and Conflicts](#cc)
+
+1. [Dictionary](#terms)]
+
+---
+
+class: inverse, center, middle
+name: recap
+
+# Recap
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
+
+---
+
+# Key Git Terms (1)
+
+### **Repository**
+
+Git projects have two parts: the files and directories you create and edit directly, and the extra information that Git records about the project's history. 
+
+The combination of these two things is called a **repository**, or *repo* as the cool kids say. 
+
+### **Commit**
+
+You use Git to take snapshots of all the files in a repository.
+
+When you want to take a snapshot of a file or files, you create a **commit**.
+
+---
+
+# Commit (cont'd)
+
+When you **commit** a file or files, some information is saved along with the changes to the file:
+
+1. Who
+2. When
+
+Plus, you can (should!) add more information about the changes you've made in a **commit message**.
+
+# Key Git Terms (2)
+
+### **Remote**
+
+With Git, repositories can be local (on your machine) or **remote**, i.e. hosted online by a service like [Github](https://github.com/).
+
+How do you interact with a remote repository?
+
+--
+
+### **Clone**
+
+To first retrieve work from a remote, you **clone** the repository onto your local computer.
+
+Now you have a working copy, including the entire project history tracked by Git.
+
+---
+
+# Key Git Terms (2)
+
+### **Pull**/**Push**
+
+Next, you'll want your local version to 'speak' seamlessly with the remote.  
+
+A typical workflow:
+
+  + You **pull** from a remote repository to make sure you have the latest version of everything locally.
+  + You do some work, and commit it.
+  + You **push** your new commits back to the remote repository so that it's backed up there and your collaborators can access it.
+  
+--
+
+### **Let's try doing this in the Terminal!**
+
+---
+
+class: inverse, center, middle
+name: navigate
+
+# Navigating the Commit History
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
+
+---
+
+# Checkout
+
+What if you want to restore a previous version of your file?
+
+--
+
+Find the latest commits involving the README (three in this case):
+
+```bash
+$ git log -3 README.md # Retrieve hash of offending commit 
+```
+--
+
+Inspect the changes that were made in that commit:
+
+```bash
+$ git show HASH 
+```
+
+--
+
+We can use `git checkout` to restore the file to the version in that commit.
+
+```bash
+$ git checkout -- HASH README.md
+# specify the file in case multiple were changed in that commit
+```
+
+--
+
++ Restoring a file doesn't erase any of the repo's history.
++ Instead, the act of restoring the file is saved as another commit, because you might later want to undo your undoing :)
+
+---
+
+class: inverse, center, middle
+name: cc
+
+# Collaborations and Conflicts
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
+
+---
+
+# Merge Conflicts
+
+Marcus and I decide to collaborate on a project.
+
++ Brandon: Invites Marcus to join as a collaborator on the Github repo<sup>1</sup>.
+
++ Marcus: Clones the repo to his local machine, so that they both now have an up-to-date working copy.
+
+Now we both have access and are working simultaneously on files within the repo (e.g. the code, report writing, etc) ... and **conflicts** may arise.
+
+.font80[.footnote[
+<sup>1</sup> Can be done via the 'Settings' tab in any Github repo, then 'Collaborators & teams'. A collaborator will have **write** access to a repo, i.e. they can push/pull.]]
+
+--
+
++ Marcus: Makes some edits to a file (Text file, in this case), then proceeds to stage, commit, and push these changes.
+
++ Brandon: Meanwhile, he also makes changes to the Text file and attempts to stage, commit, and push them (*after* pulling from the Github repo first).
+
+**What happens?**
+
+.font80[.footnote[
+<sup>1</sup> Can be done via the 'Settings' tab in any Github repo, then 'Collaborators & teams'. A collaborator will have **write** access to a repo, i.e. they can push/pull.]]
+
+---
+
+# Merge Conflicts (cont'd)
+
+Brandon encounters a `merge conflict` error.
+
+Let's confirm what's going on.
+
+```bash
+$ git status
+```
+
+As part of the response, he should see something like:
+```bash
+Your branch and 'origin/main' have diverged.
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+  
+   * both modified:   merge-conflixt.txt 
+```
+--
+
+Git is protecting Brandon by refusing the merge. It wants to make sure that he doesn't accidentally overwrite all of his changes by pulling Marcus' version of the README.
+
+- In this case, the source of the problem was obvious. Once we start working on bigger projects, however, `git status` can provide a helpful summary to see which files are in conflict.
+
+---
+
+# Merge Conflicts (cont'd)
+
+Okay, let's see what's happening here by opening up the Text file. RStudio is a good choice, although your preferred text editor is fine.
+
+You should see something like:
+```bash
+# README
+Some text here.
+<<<<<<< HEAD
+Text added by Marcus.
+=======
+Text added by Brandon.
+>>>>>>> 9601a7dea9cbb90bfea4f5b812d492b758b46a18.
+More text here.
+```
+
+---
+
+# Merge Conflicts (cont'd)
+
+What do these demarcations mean?
+
+```bash
+# README
+Some text here.
+<<<<<<< HEAD
+Text added by Marcus.
+=======
+Text added by Brandon.
+>>>>>>> 9601a7dea9cbb90bfea4f5b812d492b758b46a18.
+More text here.
+```
+---
+count:false
+# Merge Conflicts (cont'd)
+
+What do these demarcations mean?
+
+```bash
+# README
+Some text here.
+*<<<<<<< HEAD
+Text added by Marcus.
+=======
+Text added by Brandon.
+>>>>>>> 9601a7dea9cbb90bfea4f5b812d492b758b46a18.
+More text here.
+```
+
++ `<<<<<<< HEAD` indicates the start of the merge conflict
+
+---
+count:false
+# Merge Conflicts (cont'd)
+
+What do these demarcations mean?
+
+```bash
+# README
+Some text here.
+<<<<<<< HEAD
+Text added by Marcus.
+*=======
+Text added by Brandon.
+>>>>>>> 9601a7dea9cbb90bfea4f5b812d492b758b46a18.
+More text here.
+```
+
++ `<<<<<<< HEAD` indicates the start of the merge conflict
++ `=======` indicates the break point used for comparison.
+
+---
+count:false
+# Merge Conflicts (cont'd)
+
+What do these demarcations mean?
+
+```bash
+# README
+Some text here.
+<<<<<<< HEAD
+Text added by Marcus.
+=======
+Text added by Brandon.
+*>>>>>>> 9601a7dea9cbb90bfea4f5b812d492b758b46a18.
+More text here.
+```
+
++ `<<<<<<< HEAD` indicates the start of the merge conflict
++ `=======` indicates the break point used for comparison.
++ `>>>>>>> <long string>` indicates the end of the lines that had a merge conflict.
+
+Note: This string is called a **hash**. Every commit to a repository has a unique computer-generated identifier called a hash.
+
+---
+
+# Merge Conflicts (cont'd)
+
+Fixing these conflicts is a simple matter of manually editing the README file.
+
++ Delete the lines that you don't want.
++ Delete the special Git merge conflict symbols.
+
+Then:
+
+```bash
+$ git add merge-conflict.txt # to make the resolution
+
+$ git commit -m "resolved message" # to conclude the merge
+```
+
+Now Brandon can push his changes to the Github repo without any errors.
+
+---
+
+# Merge Conflicts (cont'd)
+
+### n.b.
+
++ Brandon gets to decide what to keep because he fixed the merge conflict.
+
++ However, the full commit history is preserved, so Marcus can always recover his changes if desired (or he disagrees!).
+
++ A more elegant solution to these conflicts is provided by Git **branches** (which we'll talk about *next* next).
+
+---
+
+class: inverse, center, middle
+name: terms
+
+# Dictionary
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
+
+---
+
+# Speaking the Git language
+
+### Key terms we've covered over the last two sessions:
+
+**repository** your project directory/folder
+
+**commit** a snapshot of the current state of the repo
+
+**hash** a unique id for each commit
+
+**log**
+
+**checkout** time travel to a specific commit
+
+**switch**
+
+**remote** a copy of the repo hosted elsewhere
+
+**clone** get the repo from the remote for the first time
+
+**push** send commits to a remote
+
+**pull** get commits from a remote
+
+
+
+
+
+
