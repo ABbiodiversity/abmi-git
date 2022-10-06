@@ -77,7 +77,7 @@ When you **commit** a file or files, some information is saved along with the ch
 
 Plus, you can (should!) add more information about the changes you've made in a **commit message**.
 
---
+---
 
 # Key Git Terms (2)
 
