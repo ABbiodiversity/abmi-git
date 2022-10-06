@@ -1,6 +1,6 @@
-# cure4git
+# abmi-git
 
-This repository is a place for ABMI staff to:
+This repository is a place for ABMI staff (and friends!) to:
 
 + Practice and refine their git wizardry
 + Access tutorials
@@ -8,20 +8,11 @@ This repository is a place for ABMI staff to:
 
 **Slides for the workshops can be viewed here:**
 
-1. [Introduction to Git](https://ABbiodiversity.github.io/cure4git/cure4git-intro.html) - October 21, 2019
+1. [Introduction to Git](https://ABbiodiversity.github.io/abmi-git/Intro-ABMI.html) - September 29, 2022
 
-  + 1.1 [Introduction to Git - Bayne Lab](https://ABbiodiversity.github.io/cure4git/cure4git-Intro-BayneLab.html)
-  + 1.2 [Geospatial Centre - Lunch n' Lean](https://ABbiodiversity.github.io/cure4git/cure4git-Intro-GC.html)
+2. 
 
-2. [Advanced Git](https://ABbiodiversity.github.io/cure4git/cure4git-AdvGit.html) - December 4, 2019
-
-3. ABMI Git - TBD
-
----
-
-**Supplementary Materials:**
-
-Git from (S)hell
+3. 
 
 ---
 
