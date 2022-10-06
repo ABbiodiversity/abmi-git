@@ -110,10 +110,6 @@ A typical workflow:
   + You **pull** from a remote repository to make sure you have the latest version of everything locally.
   + You do some work, and commit it.
   + You **push** your new commits back to the remote repository so that it's backed up there and your collaborators can access it.
-  
---
-
-### **Let's try doing this in the Terminal!**
 
 ---
 
@@ -150,7 +146,7 @@ $ git show HASH
 We can use `git checkout` to restore the file to the version in that commit.
 
 ```bash
-$ git checkout -- HASH README.md
+$ git checkout HASH README.md
 # specify the file in case multiple were changed in that commit
 ```
 
@@ -158,6 +154,15 @@ $ git checkout -- HASH README.md
 
 + Restoring a file doesn't erase any of the repo's history.
 + Instead, the act of restoring the file is saved as another commit, because you might later want to undo your undoing :)
+
+---
+
+# Checkout
+
+#### Let's go over these commands, using both:
+
+- RStudio
+- Command Line (aka the Terminal, Shell, Bash)
 
 ---
 
@@ -172,7 +177,7 @@ name: cc
 
 # Merge Conflicts
 
-Marcus and I decide to collaborate on a project.
+Marcus and Brandon decide to collaborate on a project.
 
 + Brandon: Invites Marcus to join as a collaborator on the Github repo&lt;sup&gt;1&lt;/sup&gt;.
 
@@ -369,11 +374,9 @@ name: terms
 
 **hash** a unique id for each commit
 
-**log**
+**log** display all the commits in a repository's history
 
 **checkout** time travel to a specific commit
-
-**switch**
 
 **remote** a copy of the repo hosted elsewhere
 
