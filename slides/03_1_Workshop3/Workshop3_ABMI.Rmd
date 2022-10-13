@@ -1,0 +1,508 @@
+---
+title: "Introduction to Git(hub) - Part III <html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
+author: October 13, 2022
+date: # `r format(Sys.time())
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts] 
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      hightlightSpans: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include = FALSE}
+
+options(htmltools.dir.version = FALSE)
+
+library(knitr)
+
+opts_chunk$set(
+  #prompt = T,
+  fig.align="center", #fig.width=6, fig.height=4.5, 
+  # out.width="748px", #out.length="520.75px",
+  dpi=300, #fig.path='Figs/',
+  cache=T#, echo=F, warning=F, message=F
+  )
+
+```
+
+# Outline of this workshop
+
+### Workshop 3 (Today! Right now!)
+<br>
+.font130[1. [Recap](#recap)
+
+1. [Branches and Pull Requests](#branches)
+  
+1. [Forks](#forks)
+
+1. [Project Organization](#projorg)
+
+1. [Github Pages](#pages)]
+
+---
+class: inverse, center, middle
+name: recap
+
+# Recap
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
+
+---
+
+# Key Git Terms (1)
+
+### **Repository**
+
+Git projects have two parts: the files and directories you create and edit directly, and the extra information that Git records about the project's history. 
+
+The combination of these two things is called a **repository**, or *repo* as the cool kids say. 
+
+### **Commit**
+
+You use Git to take snapshots of all the files in a repository.
+
+When you want to take a snapshot of a file or files, you create a **commit**.
+
+---
+
+# Commit (cont'd)
+
+When you **commit** a file or files, some information is saved along with the changes to the file:
+
+1. Who
+2. When
+
+Plus, you can (should!) add more information about the changes you've made in a **commit message**.
+
+---
+
+# Key Git Terms (2)
+
+### **Remote**
+
+With Git, repositories can be local (on your machine) or **remote**, i.e. hosted online by a service like [Github](https://github.com/).
+
+How do you interact with a remote repository?
+
+--
+
+### **Clone**
+
+To first retrieve work from a remote, you **clone** the repository onto your local computer.
+
+Now you have a working copy, including the entire project history tracked by Git.
+
+---
+
+# Key Git Terms (2)
+
+### **Pull**/**Push**
+
+Next, you'll want your local version to 'speak' seamlessly with the remote.  
+
+A typical workflow:
+
+  + You **pull** from a remote repository to make sure you have the latest version of everything locally.
+  + You do some work, and commit it.
+  + You **push** your new commits back to the remote repository so that it's backed up there and your collaborators can access it.
+  
+---
+
+# Basic Git shell commands
+
+First: why bother?
++ RStudio's Git integration and built-in GUI cover all the major operations.
++ But the shell is more powerful and flexible, and it's good to understand what is going on underneath the hood.
+
+--
+
+Clone a repo.
+
+```bash
+$ git clone REPOSITORY-URL
+```
+
+See the commit history (hit spacebar to scroll down or 'q' to exit)
+
+```bash
+$ git log
+```
+
+What has changed?
+
+```bash
+$ git status
+```
+
+---
+
+# Basic Git shell commands (cont'd)
+
+Stage ("add") a file or group of files
+
+```bash
+$ git add README.md # Name of file or folder.
+```
+
+There are a bunch of useful 'flag' options too:
+
+  + Stage all files
+
+  ```bash
+  $ git add -A
+  ```
+  
+  + Stage updated files only (modified or deleted, but not new).
+  
+  ```bash
+  $ git add -u
+  ```
+  
+  + Stage new files only (not updated)
+  
+  ```bash
+  $ git add .
+  ```
+
+---
+
+# Basic Git shell commands (cont'd)
+
+Commit your changes.
+
+```bash
+$ git commit -m "I made these changes."
+```
+
+Pull from the upstream repository (i.e. Github).
+
+```bash
+$ git pull
+```
+
+(Maybe you have to fix some **Merge Conflicts**)
+
+Push any local changes that you've committed to the upstream repo.
+  
+```bash
+$ git push
+```
+
+---
+class: inverse, center, middle
+name: branches
+
+# Branches and Pull Requests
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
+---
+
+# What are Branches?
+
++ **Branches** allow you to have multiple versions of your work, and lets you track each version systematically.
+
++ Branches allow you to take a snapshot of your existing repo and try out a whole new idea *without affecting* your `main`<sup>1</sup> branch.
+
+.font80[.footnote[
+<sup>1</sup> The default branch name in Git used `main`; it used to be called `master`, which you might still see on some legacy repositories. You can also rename the `main` branch.]]
+
+--
+
++ Once you (and your collaborators) are 100% satisfied with the new work, you can **merge** the new branch back into the main branch.
+
+  - This is how most new features in modern software and apps are developed.
+  - Helps to catch and fix bugs.
+  - Researchers - like us! - can easily use this feature to try out new ideas and analyses (e.g., experimental modeling, requested revisions, etc)
+
++ If you aren't happy with an experimental branch, just delete it, safe with the knowledge that your precious main branch will be unaffected.
+
+---
+
+# What are Branches?
+
+At its core, a **branch** is a movable label attached to a commit.
+
+A **merge** is a combination of two or more branches; i.e., a special commit that is a combination of all the commits from both branches.
+
+[Conceptually, this is what a project with multiple branches looks like.](https://speakerdeck.com/alicebartlett/git-for-humans?slide=55)
+
+--
+
+<br>
+
+How do we create a new branch in RStudio?
+
+(Marcus will create another gif and post it in the slides, don't worry.)
+
+---
+
+# Branches in the Shell
+
+Creating a new branch is simple in the shell.
+
+```bash
+$ git checkout -b my-new-idea
+```
+
+Push the new branch to the remote on Github (called `origin`).
+
+```bash
+$ git push origin my-new-idea
+```
+
+Switch back to the `main` branch
+
+```bash
+$ git checkout main
+```
+
+List all of the branches in your repository
+
+```bash
+$ git branch
+ *main # A star will appear beside the branch that you're currently in
+  my-new-idea
+```
+
+---
+
+# Merging Branches
+
+<div align="center">
+<img src="pics/Friends_Chandler_MERGE.gif" height=500>
+</div>
+
+---
+
+# Merging Branches
+
+There are two options:
+
+## 1. Locally
+
++ Commit your final changes in the new branch (`my-new-idea`)
++ Switch back to the `main` branch:
+  ```bash
+  $ git checkout main
+  ```
++ Merge the two:
+  ```bash
+  $ git merge my-new-idea main
+  ```
++ Delete my-new-idea (optional):
+  ```bash
+  $ git branch -d my-new-idea
+  ```
+  
+---
+
+# Merging Branches
+
+There are two options:
+
+## 2. Remotely (i.e. *pull requests* on Github)
+
++ **Pull Requests** (PRs) are a great way to notify collaborators - or yourself! - that you have completed a feature.
++ You write a summary of all the changes contained in the branch.
++ You then assign suggested reviewers of your code - including yourself potentially! - who are then able to approve these changes ("Merge pull request") on Github.
+
+---
+
+# Merging Branches
+
+<div align="center">
+<img src="pics/obama.png" height=500>
+</div>
+
+---
+
+# Group Exercise!
+
+### Try to do the following in the breakout rooms:
+
+<br>
+
+1. Create a new branch in your test repository.
+
+2. In the new branch, make some local changes, commit, then push them to Github.
+
+3. Head over to the repo on Github
+
+  + You should see a new green button "Compare and pull request". Click it.
+  + Add a meta description of what this PR accomplishes. 
+  + Click "Create pull request".
+  + (Here's where you or your collaborators would review all the changes.)
+  + Once satisfied, click "Merge pull request and then confirm"
+
+Congrats! You've made your first PR!
+
+---
+class: inverse, center, middle
+name: forks
+
+# Forks
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
+
+---
+
+# Forks
+
+(one last term to learn!!)
+
+**Forking** is kind of a hybrid between cloning a repo and branching from it.
+
+When you fork an existing repository, you create an *independent* copy of it under your own Github account.
+
+Once you fork a repo, you are free to do anything you want to it. It's yours!
+
+--
+
+Forking, in combination with PRs, is a powerful way to develop software (and other research projects). For example:
+
++ An enterprising graduate student in the Bayne Lab (!!!) wants to add a new feature (or fix a bug they've identified) to the ABMI's [`wildRtrax` R package](https://github.com/ABbiodiversity/wildRtrax).
+
++ They can fork the repo where wildRtrax is hosted, add the code required, and then issue an [upstream pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork).
++ The maintainer of the package is notified and can then decide whether to merge the contribution with the main project.
+
+---
+class: inverse, center, middle
+name: projorg
+
+# Project Organization
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
+
+---
+
+# Project Organization
+
+### Why should we have consistent projects?
+
+--
+
+<br>
+
++ Consistent file/folder structure provides you with clues to where information is stored.
+
++ If standardized across multiple people, improves reproducibility among users.
+
++ Can include updates to your .gitignore to prevent data from accidentally being committed/pushed.
+
+---
+count:false
+
+# Project Organization
+
+
+<div align="center">
+<img src="pics/script.PNG" height=520>
+</div>
+
+---
+
+# Code Organization
+
+### Why should we aim for clean code?
+
++ Improves legibility when revisting code base or sharing with others.
+
++ Some further reading:
+
+  - [A call to clean code to effectively communicate science](https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.13961)
+
+  - [A Guide to Reproducible Code in Ecology and Evolution](https://www.britishecologicalsociety.org/wp-content/uploads/2017/12/guide-to-reproducible-code.pdf)
+
+---
+
+# Code Organization
+
+### Common Themes
+
+<br>
+
++ Use **relative** paths to file instead of **absolute** ones.
+  - `"~/data/raw/amphibian-data.Rdata"` (relative) Nice!
+  - `"C:/users/memyself&irene/desktop/amphibians/data/raw/amphibian-data.Rdata"` (absolute) Mean!
+  - Remember, an angel loses their wings every time you use the latter.<sup>1</sup>
+  
+<br>
+
+.font80[.footnote[
+<sup>1</sup> This is one way in which RStudio Projects are great: the .Rproj file acts as an anchor point for all other files in the repo.]]
+
+--
+
++ Use sequential names for code files.
+  - 01_data-processing.R; 02_glm-models.R (good!)
+  - cleaning.R; model.R (not so good!)
+
+---
+
+# Code Organization
+
+### Common Themes
+
+<br>
+
++ Don't repeat yourself.
+  - Defining functions vs. Copy pasting code chunks within/among projects.
+  
+--
+
+<br>
+
++ Consistency.
+  - 01_data-processing.R
+  - 1_DataProcessing.R
+  
+---
+class: inverse, center, middle
+name: pages
+
+# Github Pages
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>
+
+---
+
+# Github Pages
+
+What are they?
+
++ Custom static webpages hosted through Github.
++ Ideal for creating technical documentation associated with a repository (e.g., [bookdown](https://bookdown.org/yihui/bookdown/) documents)
++ Can also be used to create simple websites to highlight your work (e.g., through Jekyll)
+
+--
+
+The ABMI is beginning to use bookdown to document modeling for various taxa; e.g., [Amphibian Modeling](https://abbiodiversity.github.io/Amphibians/).
+
+---
+
+# Github Pages
+
+### Jekyll
+
++ Content is created through HTML and CSS code.
++ Allows for more complex websites to be built but is more challenging to learn.
+
+[Setting up a Github Pages website with Jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll
+) 
+
+
+
+
+
+
+
+
+
+
+
+
+

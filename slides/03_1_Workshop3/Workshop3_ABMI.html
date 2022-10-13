@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Workshop3_ABMI.knit</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="October 13, 2022" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css/metropolis-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Introduction to Git(hub) - Part III
+<html>
+<div style="float:left">
+
+</div>
+<hr color='#EB811B' size=1px width=796px>
+</html>
+]
+.author[
+### October 13, 2022
+]
+
+---
+
+
+
+
+# Outline of this workshop
+
+### Workshop 3 (Today! Right now!)
+&lt;br&gt;
+.font130[1. [Recap](#recap)
+
+1. [Branches and Pull Requests](#branches)
+  
+1. [Forks](#forks)
+
+1. [Project Organization](#projorg)
+
+1. [Github Pages](#pages)]
+
+---
+class: inverse, center, middle
+name: recap
+
+# Recap
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
+
+---
+
+# Key Git Terms (1)
+
+### **Repository**
+
+Git projects have two parts: the files and directories you create and edit directly, and the extra information that Git records about the project's history. 
+
+The combination of these two things is called a **repository**, or *repo* as the cool kids say. 
+
+### **Commit**
+
+You use Git to take snapshots of all the files in a repository.
+
+When you want to take a snapshot of a file or files, you create a **commit**.
+
+---
+
+# Commit (cont'd)
+
+When you **commit** a file or files, some information is saved along with the changes to the file:
+
+1. Who
+2. When
+
+Plus, you can (should!) add more information about the changes you've made in a **commit message**.
+
+---
+
+# Key Git Terms (2)
+
+### **Remote**
+
+With Git, repositories can be local (on your machine) or **remote**, i.e. hosted online by a service like [Github](https://github.com/).
+
+How do you interact with a remote repository?
+
+--
+
+### **Clone**
+
+To first retrieve work from a remote, you **clone** the repository onto your local computer.
+
+Now you have a working copy, including the entire project history tracked by Git.
+
+---
+
+# Key Git Terms (2)
+
+### **Pull**/**Push**
+
+Next, you'll want your local version to 'speak' seamlessly with the remote.  
+
+A typical workflow:
+
+  + You **pull** from a remote repository to make sure you have the latest version of everything locally.
+  + You do some work, and commit it.
+  + You **push** your new commits back to the remote repository so that it's backed up there and your collaborators can access it.
+  
+---
+
+# Basic Git shell commands
+
+First: why bother?
++ RStudio's Git integration and built-in GUI cover all the major operations.
++ But the shell is more powerful and flexible, and it's good to understand what is going on underneath the hood.
+
+--
+
+Clone a repo.
+
+```bash
+$ git clone REPOSITORY-URL
+```
+
+See the commit history (hit spacebar to scroll down or 'q' to exit)
+
+```bash
+$ git log
+```
+
+What has changed?
+
+```bash
+$ git status
+```
+
+---
+
+# Basic Git shell commands (cont'd)
+
+Stage ("add") a file or group of files
+
+```bash
+$ git add README.md # Name of file or folder.
+```
+
+There are a bunch of useful 'flag' options too:
+
+  + Stage all files
+
+  ```bash
+  $ git add -A
+  ```
+  
+  + Stage updated files only (modified or deleted, but not new).
+  
+  ```bash
+  $ git add -u
+  ```
+  
+  + Stage new files only (not updated)
+  
+  ```bash
+  $ git add .
+  ```
+
+---
+
+# Basic Git shell commands (cont'd)
+
+Commit your changes.
+
+```bash
+$ git commit -m "I made these changes."
+```
+
+Pull from the upstream repository (i.e. Github).
+
+```bash
+$ git pull
+```
+
+(Maybe you have to fix some **Merge Conflicts**)
+
+Push any local changes that you've committed to the upstream repo.
+  
+```bash
+$ git push
+```
+
+---
+class: inverse, center, middle
+name: branches
+
+# Branches and Pull Requests
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
+---
+
+# What are Branches?
+
++ **Branches** allow you to have multiple versions of your work, and lets you track each version systematically.
+
++ Branches allow you to take a snapshot of your existing repo and try out a whole new idea *without affecting* your `main`&lt;sup&gt;1&lt;/sup&gt; branch.
+
+.font80[.footnote[
+&lt;sup&gt;1&lt;/sup&gt; The default branch name in Git used `main`; it used to be called `master`, which you might still see on some legacy repositories. You can also rename the `main` branch.]]
+
+--
+
++ Once you (and your collaborators) are 100% satisfied with the new work, you can **merge** the new branch back into the main branch.
+
+  - This is how most new features in modern software and apps are developed.
+  - Helps to catch and fix bugs.
+  - Researchers - like us! - can easily use this feature to try out new ideas and analyses (e.g., experimental modeling, requested revisions, etc)
+
++ If you aren't happy with an experimental branch, just delete it, safe with the knowledge that your precious main branch will be unaffected.
+
+---
+
+# What are Branches?
+
+At its core, a **branch** is a movable label attached to a commit.
+
+A **merge** is a combination of two or more branches; i.e., a special commit that is a combination of all the commits from both branches.
+
+[Conceptually, this is what a project with multiple branches looks like.](https://speakerdeck.com/alicebartlett/git-for-humans?slide=55)
+
+--
+
+&lt;br&gt;
+
+How do we create a new branch in RStudio?
+
+(Marcus will create another gif and post it in the slides, don't worry.)
+
+---
+
+# Branches in the Shell
+
+Creating a new branch is simple in the shell.
+
+```bash
+$ git checkout -b my-new-idea
+```
+
+Push the new branch to the remote on Github (called `origin`).
+
+```bash
+$ git push origin my-new-idea
+```
+
+Switch back to the `main` branch
+
+```bash
+$ git checkout main
+```
+
+List all of the branches in your repository
+
+```bash
+$ git branch
+ *main # A star will appear beside the branch that you're currently in
+  my-new-idea
+```
+
+---
+
+# Merging Branches
+
+&lt;div align="center"&gt;
+&lt;img src="pics/Friends_Chandler_MERGE.gif" height=500&gt;
+&lt;/div&gt;
+
+---
+
+# Merging Branches
+
+There are two options:
+
+## 1. Locally
+
++ Commit your final changes in the new branch (`my-new-idea`)
++ Switch back to the `main` branch:
+  ```bash
+  $ git checkout main
+  ```
++ Merge the two:
+  ```bash
+  $ git merge my-new-idea main
+  ```
++ Delete my-new-idea (optional):
+  ```bash
+  $ git branch -d my-new-idea
+  ```
+  
+---
+
+# Merging Branches
+
+There are two options:
+
+## 2. Remotely (i.e. *pull requests* on Github)
+
++ **Pull Requests** (PRs) are a great way to notify collaborators - or yourself! - that you have completed a feature.
++ You write a summary of all the changes contained in the branch.
++ You then assign suggested reviewers of your code - including yourself potentially! - who are then able to approve these changes ("Merge pull request") on Github.
+
+---
+
+# Merging Branches
+
+&lt;div align="center"&gt;
+&lt;img src="pics/obama.png" height=500&gt;
+&lt;/div&gt;
+
+---
+
+# Group Exercise!
+
+### Try to do the following in the breakout rooms:
+
+&lt;br&gt;
+
+1. Create a new branch in your test repository.
+
+2. In the new branch, make some local changes, commit, then push them to Github.
+
+3. Head over to the repo on Github
+
+  + You should see a new green button "Compare and pull request". Click it.
+  + Add a meta description of what this PR accomplishes. 
+  + Click "Create pull request".
+  + (Here's where you or your collaborators would review all the changes.)
+  + Once satisfied, click "Merge pull request and then confirm"
+
+Congrats! You've made your first PR!
+
+---
+class: inverse, center, middle
+name: forks
+
+# Forks
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
+
+---
+
+# Forks
+
+(one last term to learn!!)
+
+**Forking** is kind of a hybrid between cloning a repo and branching from it.
+
+When you fork an existing repository, you create an *independent* copy of it under your own Github account.
+
+Once you fork a repo, you are free to do anything you want to it. It's yours!
+
+--
+
+Forking, in combination with PRs, is a powerful way to develop software (and other research projects). For example:
+
++ An enterprising graduate student in the Bayne Lab (!!!) wants to add a new feature (or fix a bug they've identified) to the ABMI's [`wildRtrax` R package](https://github.com/ABbiodiversity/wildRtrax).
+
++ They can fork the repo where wildRtrax is hosted, add the code required, and then issue an [upstream pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork).
++ The maintainer of the package is notified and can then decide whether to merge the contribution with the main project.
+
+---
+class: inverse, center, middle
+name: projorg
+
+# Project Organization
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
+
+---
+
+# Project Organization
+
+### Why should we have consistent projects?
+
+--
+
+&lt;br&gt;
+
++ Consistent file/folder structure provides you with clues to where information is stored.
+
++ If standardized across multiple people, improves reproducibility among users.
+
++ Can include updates to your .gitignore to prevent data from accidentally being committed/pushed.
+
+---
+count:false
+
+# Project Organization
+
+
+&lt;div align="center"&gt;
+&lt;img src="pics/script.PNG" height=520&gt;
+&lt;/div&gt;
+
+---
+
+# Code Organization
+
+### Why should we aim for clean code?
+
++ Improves legibility when revisting code base or sharing with others.
+
++ Some further reading:
+
+  - [A call to clean code to effectively communicate science](https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.13961)
+
+  - [A Guide to Reproducible Code in Ecology and Evolution](https://www.britishecologicalsociety.org/wp-content/uploads/2017/12/guide-to-reproducible-code.pdf)
+
+---
+
+# Code Organization
+
+### Common Themes
+
+&lt;br&gt;
+
++ Use **relative** paths to file instead of **absolute** ones.
+  - `"~/data/raw/amphibian-data.Rdata"` (relative) Nice!
+  - `"C:/users/memyself&amp;irene/desktop/amphibians/data/raw/amphibian-data.Rdata"` (absolute) Mean!
+  - Remember, an angel loses their wings every time you use the latter.&lt;sup&gt;1&lt;/sup&gt;
+  
+&lt;br&gt;
+
+.font80[.footnote[
+&lt;sup&gt;1&lt;/sup&gt; This is one way in which RStudio Projects are great: the .Rproj file acts as an anchor point for all other files in the repo.]]
+
+--
+
++ Use sequential names for code files.
+  - 01_data-processing.R; 02_glm-models.R (good!)
+  - cleaning.R; model.R (not so good!)
+
+---
+
+# Code Organization
+
+### Common Themes
+
+&lt;br&gt;
+
++ Don't repeat yourself.
+  - Defining functions vs. Copy pasting code chunks within/among projects.
+  
+--
+
+&lt;br&gt;
+
++ Consistency.
+  - 01_data-processing.R
+  - 1_DataProcessing.R
+  
+---
+class: inverse, center, middle
+name: pages
+
+# Github Pages
+
+&lt;html&gt;&lt;div style='float:left'&gt;&lt;/div&gt;&lt;hr color='#EB811B' size=1px width=796px&gt;&lt;/html&gt;
+
+---
+
+# Github Pages
+
+What are they?
+
++ Custom static webpages hosted through Github.
++ Ideal for creating technical documentation associated with a repository (e.g., [bookdown](https://bookdown.org/yihui/bookdown/) documents)
++ Can also be used to create simple websites to highlight your work (e.g., through Jekyll)
+
+--
+
+The ABMI is beginning to use bookdown to document modeling for various taxa; e.g., [Amphibian Modeling](https://abbiodiversity.github.io/Amphibians/).
+
+---
+
+# Github Pages
+
+### Jekyll
+
++ Content is created through HTML and CSS code.
++ Allows for more complex websites to be built but is more challenging to learn.
+
+[Setting up a Github Pages website with Jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll
+) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"hightlightSpans": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
