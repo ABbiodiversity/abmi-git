@@ -8,11 +8,11 @@ This repository is a place for ABMI staff (and friends!) to:
 
 **Slides for the workshops can be viewed here:**
 
-1. [Introduction to Git](https://ABbiodiversity.github.io/abmi-git/Intro-ABMI.html) - September 29, 2022
+1. [Part I](https://ABbiodiversity.github.io/abmi-git/Intro-ABMI.html) - September 29, 2022
 
-2. 
+2. [Part II](https://ABbiodiversity.github.io/abmi-git/Workshop2_ABMI.html) - October 6, 2022
 
-3. 
+3. [Part III](https://ABbiodiversity.github.io/abmi-git/Workshop3_ABMI.html) - October 13, 2022
 
 ---
 
